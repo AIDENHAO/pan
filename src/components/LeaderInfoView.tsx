@@ -32,7 +32,7 @@ interface CultivationStage {
     maxValue: number;
   }
 
-interface LeaderInfo {
+interface LeaderInfoView {
   name: string;
   title: string;
   realmLevel: number;
