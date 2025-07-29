@@ -1,0 +1,48 @@
+{
+  "name": "张青云",
+  "title": "青云真人",
+  "realmLevel": 3,
+  "cultivationValue": 80000,
+  "cultivationLimit": 1163,
+  "cultivationOverLimit": true,
+  "talentValue": 0,
+  "position": 9,
+  "joinDate": "天历302年",
+  "skills": [
+    "青云剑诀",
+    "御剑术",
+    "清心诀"
+  ],
+  "discipleCount": 156,
+  "sectLevel": 4,
+  "sectReputation": 8750,
+  "disciples": [
+    {
+      "id": 1,
+      "name": "李慕然",
+      "realmLevel": 1,
+      "cultivation": 3500,
+      "status": "修炼中"
+    },
+    {
+      "id": 2,
+      "name": "王语嫣",
+      "realmLevel": 2,
+      "cultivation": 5200,
+      "status": "外出历练"
+    },
+    {
+      "id": 3,
+      "name": "赵凌云",
+      "realmLevel": 3,
+      "cultivation": 9800,
+      "status": "闭关突破"
+    }
+  ],
+  "resources": {
+    "spiritStone": 15000,
+    "herbs": 350,
+    "magicWeapons": 42,
+    "treasures": 18
+  }
+}

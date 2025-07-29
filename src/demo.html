@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>休闲宗门管理面板</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8f4e9;
+            color: #4a4a4a;
+        }
+        .sidebar-item {
+            transition: all 0.3s ease;
+        }
+        .sidebar-item:hover {
+            background-color: rgba(78, 147, 120, 0.1);
+            transform: translateX(5px);
+        }
+        .resource-card {
+            transition: all 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .disciple-card {
+            transition: all 0.3s ease;
+        }
+        .disciple-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .building-progress {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e0e0e0;
+        }
+        .building-progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #4e9378, #8bc34a);
+        }
+        .task-item {
+            transition: all 0.3s ease;
+        }
+        .task-item:hover {
+            background-color: rgba(78, 147, 120, 0.05);
+        }
+        .notification-item {
+            transition: all 0.3s ease;
+        }
+        .notification-item:hover {
+            background-color: rgba(78, 147, 120, 0.05);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex flex-col h-screen">
+        <!-- 顶部导航栏 -->
+        <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between border-b border-gray-200">
+            <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-green-600 to-teal-400 flex items-center justify-center text-white mr-3">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800">青云宗</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+                    <div class="w-6 h-6 rounded-full bg-yellow-400 flex items-center justify-center text-white mr-2">
+                        <i class="fas fa-coins text-xs"></i>
+                    </div>
+                    <span class="font-medium">12,450</span>
+                </div>
+                <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+                    <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white mr-2">
+                        <i class="fas fa-leaf text-xs"></i>
+                    </div>
+                    <span class="font-medium">3,287</span>
+                </div>
+                <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+                    <div class="w-6 h-6 rounded-full bg-gray-600 flex items-center justify-center text-white mr-2">
+                        <i class="fas fa-gem text-xs"></i>
+                    </div>
+                    <span class="font-medium">856</span>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden">
+            <!-- 左侧导航栏 -->
+            <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+                <nav class="flex-1 overflow-y-auto p-4">
+                    <div class="space-y-2">
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg bg-green-50 text-green-700 font-medium">
+                            <i class="fas fa-home mr-3 text-green-600"></i>
+                            宗门概览
+                        </a>
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-green-700">
+                            <i class="fas fa-coins mr-3 text-yellow-500"></i>
+                            资源管理
+                        </a>
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-green-700">
+                            <i class="fas fa-users mr-3 text-blue-500"></i>
+                            弟子管理
+                        </a>
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-green-700">
+                            <i class="fas fa-building mr-3 text-purple-500"></i>
+                            建筑设施
+                        </a>
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-green-700">
+                            <i class="fas fa-tasks mr-3 text-orange-500"></i>
+                            日常任务
+                        </a>
+                        <a href="#" class="sidebar-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-green-700">
+                            <i class="fas fa-info-circle mr-3 text-teal-500"></i>
+                            宗门信息
+                        </a>
+                    </div>
+                </nav>
+                <div class="p-4 border-t border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                        <div>
+                            <p class="font-medium">宗主</p>
+                            <p class="text-sm text-gray-500">元婴期</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 主内容区域 -->
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-coins text-yellow-500 mr-2"></i>
+                            资源总览
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="resource-card bg-yellow-50 rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">灵石</p>
+                                        <p class="text-sm text-gray-500">+1,245 今日收入</p>
+                                    </div>
+                                </div>
+                                <span class="text-xl font-bold">12,450</span>
+                            </div>
+                            <div class="resource-card bg-green-50 rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">药材</p>
+                                        <p class="text-sm text-gray-500">+328 今日采集</p>
+                                    </div>
+                                </div>
+                                <span class="text-xl font-bold">3,287</span>
+                            </div>
+                            <div class="resource-card bg-gray-100 rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-gem"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">矿石</p>
+                                        <p class="text-sm text-gray-500">+56 今日开采</p>
+                                    </div>
+                                </div>
+                                <span class="text-xl font-bold">856</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 md:col-span-2">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-users text-blue-500 mr-2"></i>
+                            弟子列表
+                        </h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">姓名</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">等级</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">资质</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="disciple-card hover:bg-gray-50 cursor-pointer">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <span class="font-medium">林清玄</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">金丹期</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-gray-300"></i>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">修炼中</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="disciple-card hover:bg-gray-50 cursor-pointer">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <span class="font-medium">赵灵儿</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">筑基期</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400"></i>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">采药中</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="disciple-card hover:bg-gray-50 cursor-pointer">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <span class="font-medium">李逍遥</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">练气期</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                                <i class="fas fa-star text-gray-300"></i>
+                                                <i class="fas fa-star text-gray-300"></i>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">受伤</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-building text-purple-500 mr-2"></i>
+                            建筑设施
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">主殿</p>
+                                            <p class="text-sm text-gray-500">等级 3</p>
+                                        </div>
+                                    </div>
+                                    <button class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200">升级</button>
+                                </div>
+                                <div class="building-progress mt-2">
+                                    <div class="building-progress-bar" style="width: 45%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>45%</span>
+                                    <span>需要: 500灵石</span>
+                                </div>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                                            <i class="fas fa-flask"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">炼丹房</p>
+                                            <p class="text-sm text-gray-500">等级 2</p>
+                                        </div>
+                                    </div>
+                                    <button class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200">升级</button>
+                                </div>
+                                <div class="building-progress mt-2">
+                                    <div class="building-progress-bar" style="width: 75%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>75%</span>
+                                    <span>需要: 300灵石</span>
+                                </div>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">药园</p>
+                                            <p class="text-sm text-gray-500">等级 1</p>
+                                        </div>
+                                    </div>
+                                    <button class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200">升级</button>
+                                </div>
+                                <div class="building-progress mt-2">
+                                    <div class="building-progress-bar" style="width: 20%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>20%</span>
+                                    <span>需要: 200灵石</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-tasks text-orange-500 mr-2"></i>
+                            日常任务
+                        </h2>
+                        <div class="space-y-3">
+                            <div class="task-item border border-gray-200 rounded-lg p-3 flex items-center justify-between hover:bg-orange-50 cursor-pointer">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 mr-3">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">采集灵药</p>
+                                        <p class="text-sm text-gray-500">奖励: 50灵石</p>
+                                    </div>
+                                </div>
+                                <button class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm hover:bg-orange-200">接取</button>
+                            </div>
+                            <div class="task-item border border-gray-200 rounded-lg p-3 flex items-center justify-between hover:bg-orange-50 cursor-pointer">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                                        <i class="fas fa-water"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">打水</p>
+                                        <p class="text-sm text-gray-500">奖励: 30灵石</p>
+                                    </div>
+                                </div>
+                                <button class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm hover:bg-orange-200">接取</button>
+                            </div>
+                            <div class="task-item border border-gray-200 rounded-lg p-3 flex items-center justify-between hover:bg-orange-50 cursor-pointer">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-3">
+                                        <i class="fas fa-hammer"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">修缮房屋</p>
+                                        <p class="text-sm text-gray-500">奖励: 80灵石</p>
+                                    </div>
+                                </div>
+                                <button class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm hover:bg-orange-200">接取</button>
+                            </div>
+                            <div class="task-item border border-gray-200 rounded-lg p-3 flex items-center justify-between hover:bg-orange-50 cursor-pointer">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">抄写经书</p>
+                                        <p class="text-sm text-gray-500">奖励: 60灵石</p>
+                                    </div>
+                                </div>
+                                <button class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm hover:bg-orange-200">接取</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- 右侧边栏 -->
+            <aside class="w-64 bg-white border-l border-gray-200 p-4 overflow-y-auto">
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-bolt text-yellow-500 mr-2"></i>
+                        快捷操作
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 flex flex-col items-center">
+                            <i class="fas fa-plus-circle text-xl mb-1"></i>
+                            <span class="text-xs">招收弟子</span>
+                        </button>
+                        <button class="p-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 flex flex-col items-center">
+                            <i class="fas fa-seedling text-xl mb-1"></i>
+                            <span class="text-xs">种植灵药</span>
+                        </button>
+                        <button class="p-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 flex flex-col items-center">
+                            <i class="fas fa-flask text-xl mb-1"></i>
+                            <span class="text-xs">炼制丹药</span>
+                        </button>
+                        <button class="p-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 flex flex-col items-center">
+                            <i class="fas fa-gem text-xl mb-1"></i>
+                            <span class="text-xs">开采矿石</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-bell text-red-500 mr-2"></i>
+                        通知公告
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="notification-item p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <p class="text-sm font-medium">新弟子赵灵儿加入宗门</p>
+                            <p class="text-xs text-gray-500">1小时前</p>
+                        </div>
+                        <div class="notification-item p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <p class="text-sm font-medium">药园收获灵药50株</p>
+                            <p class="text-xs text-gray-500">3小时前</p>
+                        </div>
+                        <div class="notification-item p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <p class="text-sm font-medium">炼丹房升级完成</p>
+                            <p class="text-xs text-gray-500">昨天</p>
+                        </div>
+                        <div class="notification-item p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <p class="text-sm font-medium">宗门声望提升至3级</p>
+                            <p class="text-xs text-gray-500">2天前</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        // 左侧导航菜单点击切换
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-item').forEach(i => {
+                    i.classList.remove('bg-green-50', 'text-green-700');
+                    i.classList.add('text-gray-700', 'hover:text-green-700');
+                });
+                this.classList.add('bg-green-50', 'text-green-700');
+                this.classList.remove('text-gray-700', 'hover:text-green-700');
+                
+                // 这里可以添加切换主内容区域的逻辑
+            });
+        });
+
+        // 资源卡片点击效果
+        document.querySelectorAll('.resource-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 这里可以添加查看资源详情的逻辑
+                console.log('查看资源详情');
+            });
+        });
+
+        // 弟子卡片点击效果
+        document.querySelectorAll('.disciple-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 这里可以添加查看弟子详情的逻辑
+                console.log('查看弟子详情');
+            });
+        });
+
+        // 任务接取按钮点击效果
+        document.querySelectorAll('.task-item button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.textContent = '已接取';
+                this.classList.remove('bg-orange-100', 'text-orange-700', 'hover:bg-orange-200');
+                this.classList.add('bg-gray-200', 'text-gray-600', 'cursor-not-allowed');
+                
+                // 这里可以添加接取任务的逻辑
+                console.log('接取任务');
+            });
+        });
+
+        // 建筑升级按钮点击效果
+        document.querySelectorAll('.border-gray-200 button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const progressBar = this.closest('.border-gray-200').querySelector('.building-progress-bar');
+                const currentWidth = parseFloat(progressBar.style.width) || 0;
+                const newWidth = Math.min(currentWidth + 10, 100);
+                progressBar.style.width = `${newWidth}%`;
+                progressBar.parentElement.nextElementSibling.firstElementChild.textContent = `${newWidth}%`;
+                
+                // 这里可以添加建筑升级的逻辑
+                console.log('建筑升级');
+            });
+        });
+    </script>
+</body>
+</html>
