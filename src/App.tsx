@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { increaseCultivationValue, getCultivationStageByValue, getCultivationStageByRealmLevel, getLeaderInfo as fetchLeaderInfo } from './services/leaderService';
+import { updateRealmLevel } from './services/leaderService';
+import positionMappingJson from './data/positionMapping.json';
+import realmMapping from './data/realmMapping.json';
 
 // 声明NodeJS命名空间以解决类型错误
 declare namespace NodeJS {
@@ -8,52 +11,70 @@ declare namespace NodeJS {
     _idleTimeout?: number;
   }
 }
-import positionMappingJson from './data/positionMapping.json';
 
-// 定义positionMapping的类型
+// 类型定义
+/**
+ * 职位映射接口
+ * 键为职位ID，值为职位名称
+ */
 interface PositionMapping {
   [key: number]: string;
 }
 
-// 类型断言确保JSON数据符合PositionMapping接口
-const positionMapping: PositionMapping = positionMappingJson as PositionMapping;
-import realmMapping from './data/realmMapping.json';
-import { updateRealmLevel } from './services/leaderService';
-
-// 定义导航项类型
+/**
+ * 导航项接口
+ * 定义侧边栏导航菜单的结构
+ */
 interface NavItem {
   id: string;
   name: string;
   icon?: string;
 }
 
-// 定义境界映射类型
+/**
+ * 境界映射接口
+ * 键为境界等级，值为境界名称
+ */
 interface RealmMapping {
   [key: number]: string;
 }
 
-// 定义掌门信息类型
+/**
+ * 修炼阶段接口
+ * 定义修炼境界的详细信息
+ */
 interface CultivationStage {
-    stageDivision: string;
-    majorRealm: string;
-    minorRealm: string;
-    stage: string;
-    maxValue: number;
-  }
+  stageDivision: string;
+  majorRealm: string;
+  minorRealm: string;
+  stage: string;
+  maxValue: number;
+}
 
-  interface LeaderInfo {
-    name: string;
-    title: string;
-    realmLevel: number;
-    cultivationValue: number;
-    maxValue: number;
-    position: number;
-    joinDate: string;
-    skills: string[];
-    cultivationOverLimit?: boolean;
-    cultivationStage: CultivationStage;
-  }
+/**
+ * 掌门信息接口
+ * 定义掌门的基本信息和修炼状态
+ */
+interface LeaderInfo {
+  name: string;
+  title: string;
+  realmLevel: number;
+  cultivationValue: number;
+  maxValue: number;
+  position: number;
+  joinDate: string;
+  skills: string[];
+  cultivationOverLimit?: boolean;
+  cultivationStage: CultivationStage;
+}
 
+// 类型断言确保JSON数据符合PositionMapping接口
+const positionMapping: PositionMapping = positionMappingJson as PositionMapping;
+
+/**
+ * 主应用组件
+ * 负责渲染整个应用界面，包括侧边导航和主内容区域
+ */
 const App: React.FC = (): React.ReactElement => {
   // 状态管理
   const [selectedNavItem, setSelectedNavItem] = useState<string>('leader');
@@ -65,8 +86,7 @@ const App: React.FC = (): React.ReactElement => {
   const [canBreakthrough, setCanBreakthrough] = useState<boolean>(false);
 
   // 安全访问leaderInfo的辅助函数，确保返回完整的LeaderInfo对象
-  // 重命名辅助函数以避免与服务层函数冲突
-const getCurrentLeaderInfo = (): LeaderInfo => {
+  const getSafeLeaderInfo = (): LeaderInfo => {
     if (!leaderInfo) {
       return {
         name: '',
@@ -89,78 +109,76 @@ const getCurrentLeaderInfo = (): LeaderInfo => {
     return leaderInfo;
   };
 
-  // 检查是否可以突破境界
-    // 获取掌门信息数据
-  useEffect(() => {
-    if (leaderInfo) {
-      setCanBreakthrough(leaderInfo.cultivationValue >= leaderInfo.maxValue);
-    }
-  }, [leaderInfo]);
+  /**
+   * 获取并设置掌门信息
+   * 从服务层获取掌门数据，并处理状态更新和错误处理
+   */
+  const fetchAndSetLeaderInfo = async (): Promise<void> => {
+    if (selectedNavItem !== 'leader') return;
 
+    try {
+      setLoading(true);
+      const data = await fetchLeaderInfo();
+      console.log('获取到的掌门原始数据:', data);
 
-  useEffect(() => {
-    const fetchLeaderData = async () => {
-      try {
-        setLoading(true);
-        // 从服务层获取处理后的掌门信息
-const data = await fetchLeaderInfo();
-        console.log('获取到的掌门原始数据:', data);
-        // 全面验证数据格式和必要字段
-        if (!data || typeof data !== 'object' || Array.isArray(data)) {
-          throw new Error(`掌门数据格式错误，预期为非数组对象，实际类型: ${typeof data}，数据: ${JSON.stringify(data)}`);
-        }
-        const requiredFields = ['realmLevel', 'cultivationValue', 'name', 'position'];
-        const missingFields = requiredFields.filter(field => !(field in data));
-        if (missingFields.length > 0) {
-          throw new Error(`掌门数据缺少必要字段: ${missingFields.join(', ')}`);
-        }
-        if (typeof data.realmLevel !== 'number') {
-          throw new Error(`realmLevel类型错误，预期为数字，实际为${typeof data.realmLevel}`);
-        }
-        // 使用realmLevel获取境界信息
-        const stage = getCultivationStageByRealmLevel(data.realmLevel) || {
-          stageDivision: '',
-          majorRealm: '',
-          minorRealm: '',
-          stage: '',
-          maxValue: 0
-        };
-        console.log('计算得到的境界信息:', stage);
-        if (!stage.maxValue) {
-          console.warn('境界信息中maxValue未定义或为0，可能导致突破逻辑异常');
-        }
-        setLeaderInfo({ ...data, cultivationStage: stage, maxValue: stage.maxValue });
-        // 验证状态更新结果
-        setTimeout(() => {
-          console.log('状态更新后的leaderInfo:', leaderInfo);
-          if (!leaderInfo) {
-            console.error('状态更新失败，leaderInfo仍为null');
-          } else if (!leaderInfo.cultivationStage) {
-            console.error('状态更新异常，缺少cultivationStage字段');
-          }
-        }, 0);
-        setError(null);
-      } catch (err) {
-        setError('获取掌门信息失败，请重试');
-        console.error('Error fetching leader info:', err);
-      } finally {
-        setLoading(false);
+      // 全面验证数据格式和必要字段
+      if (!data || typeof data !== 'object' || Array.isArray(data)) {
+        throw new Error(`掌门数据格式错误，预期为非数组对象，实际类型: ${typeof data}，数据: ${JSON.stringify(data)}`);
       }
-    };
 
-    if (selectedNavItem === 'leader') {
-      fetchLeaderInfo();
+      const requiredFields = ['realmLevel', 'cultivationValue', 'name', 'position'];
+      const missingFields = requiredFields.filter(field => !(field in data));
+      if (missingFields.length > 0) {
+        throw new Error(`掌门数据缺少必要字段: ${missingFields.join(', ')}`);
+      }
+
+      if (typeof data.realmLevel !== 'number') {
+        throw new Error(`realmLevel类型错误，预期为数字，实际为${typeof data.realmLevel}`);
+      }
+
+      // 使用realmLevel获取境界信息
+      const stage = getCultivationStageByRealmLevel(data.realmLevel) || {
+        stageDivision: '',
+        majorRealm: '',
+        minorRealm: '',
+        stage: '',
+        maxValue: 0
+      };
+      console.log('计算得到的境界信息:', stage);
+
+      if (!stage.maxValue) {
+        console.warn('境界信息中maxValue未定义或为0，可能导致突破逻辑异常');
+      }
+
+      setLeaderInfo({ ...data, cultivationStage: stage, maxValue: stage.maxValue });
+      setError(null);
+    } catch (err) {
+      setError('获取掌门信息失败，请重试');
+      console.error('Error fetching leader info:', err);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  /**
+   * 初始化和清理副作用
+   * 处理掌门信息获取和定时器清理
+   */
+  useEffect(() => {
+    fetchAndSetLeaderInfo();
 
     // 清理函数
     return () => {
       if (timerId) {
-        if (timerId) if (timerId) clearInterval(timerId);
+        clearInterval(timerId);
       }
     };
   }, [selectedNavItem]);
 
-  // 检查是否可以突破境界
+  /**
+   * 检查是否可以突破境界
+   * 根据当前修炼值和境界上限更新突破状态
+   */
   useEffect(() => {
     if (leaderInfo) {
       setCanBreakthrough(
@@ -170,9 +188,13 @@ const data = await fetchLeaderInfo();
     }
   }, [leaderInfo]);
 
-  // 处理境界突破
-  const handleBreakthrough = async (): Promise<void> => {
+  /**
+   * 处理境界突破
+   * 调用服务层更新境界等级，并更新本地状态
+   */
+  const handleRealmBreakthrough = async (): Promise<void> => {
     if (!leaderInfo) return;
+
     try {
       setLoading(true);
       const updatedInfo = await updateRealmLevel();
@@ -186,26 +208,30 @@ const data = await fetchLeaderInfo();
     }
   };
 
-  // 处理修炼值自增逻辑
-  const handleStartAutoIncrease = async (): Promise<void> => {
+  /**
+   * 开始自动增加修炼值
+   * 设置定时器，每秒增加修炼值并更新状态
+   */
+  const startAutoCultivation = async (): Promise<void> => {
     if (isAutoIncreasing || !leaderInfo) return;
+
     try {
       const id: NodeJS.Timeout = setInterval(async () => {
         try {
           const updated = await increaseCultivationValue(20);
           const newStage = getCultivationStageByValue(updated.cultivationValue);
-          if (newStage && newStage.maxValue) {
-            setLeaderInfo(prev => prev ? {...prev, ...updated, cultivationStage: newStage, maxValue: newStage.maxValue} : updated);
-            if (updated.cultivationValue >= newStage.maxValue) {
-              handleStopAutoIncrease();
-            }
+          setLeaderInfo(prev => prev ? {...prev, ...updated, cultivationStage: newStage, maxValue: newStage.maxValue} : updated);
+
+          if (updated.cultivationValue >= newStage.maxValue) {
+            stopAutoCultivation();
           }
         } catch (error) {
           console.error('修炼错误:', error);
-          handleStopAutoIncrease();
+          stopAutoCultivation();
           alert('修炼过程中发生错误，已自动停止');
         }
       }, 1000);
+
       setTimerId(id);
       setIsAutoIncreasing(true);
     } catch (error) {
@@ -214,7 +240,11 @@ const data = await fetchLeaderInfo();
     }
   };
 
-  const handleStopAutoIncrease = (): void => {
+  /**
+   * 停止自动增加修炼值
+   * 清除定时器并更新状态
+   */
+  const stopAutoCultivation = (): void => {
     setIsAutoIncreasing(false);
     if (timerId) {
       clearInterval(timerId);
@@ -222,25 +252,10 @@ const data = await fetchLeaderInfo();
     }
   };
 
-  const handleRealmBreak = (): void => {
-    const info = getCurrentLeaderInfo();
-    if (info.cultivationValue >= info.cultivationStage.maxValue) {
-      console.log('执行境界突破');
-      handleBreakthrough();
-    }
-  };
-
-  // 导航菜单数据
-  const navItems: NavItem[] = [
-    { id: 'leader', name: '掌门信息' },
-    { id: 'sect', name: '宗门信息' },
-    { id: 'disciples', name: '弟子管理' },
-    { id: 'resources', name: '资源管理' },
-    { id: 'missions', name: '任务发布' },
-    { id: 'settings', name: '设置' }
-  ];
-
-  // 渲染主内容区域
+  /**
+   * 渲染主内容区域
+   * 根据选中的导航项显示不同内容
+   */
   const renderContent = () => {
     if (loading) {
       return (
@@ -255,7 +270,7 @@ const data = await fetchLeaderInfo();
       return (
         <div className="error-message">
           <p>{error}</p>
-          <button onClick={() => window.location.reload()}>重试</button>
+          <button onClick={fetchAndSetLeaderInfo}>重试</button>
         </div>
       );
     }
@@ -270,7 +285,7 @@ const data = await fetchLeaderInfo();
               </div>
               <div className="leader-basic-info">
                 <h3>{leaderInfo?.name}<span className="title">{leaderInfo?.title}</span></h3>
-                <p className="position">{positionMapping[getCurrentLeaderInfo().position] || '未知职位'}</p>
+                <p className="position">{positionMapping[getSafeLeaderInfo().position] || '未知职位'}</p>
               </div>
             </div>
 
@@ -293,20 +308,20 @@ const data = await fetchLeaderInfo();
                 </div>
                 <div className="cultivation-controls">
                   <button 
-                    onClick={isAutoIncreasing ? handleStopAutoIncrease : handleStartAutoIncrease}
+                    onClick={isAutoIncreasing ? stopAutoCultivation : startAutoCultivation}
                     className={isAutoIncreasing ? 'stop-btn' : 'start-btn'}
-                    disabled={getCurrentLeaderInfo().cultivationValue >= getCurrentLeaderInfo().maxValue}
+                    disabled={getSafeLeaderInfo().cultivationValue >= getSafeLeaderInfo().maxValue}
                   >
                     {isAutoIncreasing ? '停止修炼' : '开始修炼'}
                   </button>
                   <button 
-                    onClick={handleBreakthrough}
+                    onClick={handleRealmBreakthrough}
                     className="start-btn"
                     disabled={!canBreakthrough || loading}
                   >
                     境界突破
                   </button>
-                  {getCurrentLeaderInfo().cultivationValue >= getCurrentLeaderInfo().maxValue && (
+                  {getSafeLeaderInfo().cultivationValue >= getSafeLeaderInfo().maxValue && (
                     <span className="max-reached">已达当前境界上限</span>
                   )}
                 </div>
@@ -340,6 +355,16 @@ const data = await fetchLeaderInfo();
         );
     }
   };
+
+  // 导航菜单数据
+  const navItems: NavItem[] = [
+    { id: 'leader', name: '掌门信息' },
+    { id: 'sect', name: '宗门信息' },
+    { id: 'disciples', name: '弟子管理' },
+    { id: 'resources', name: '资源管理' },
+    { id: 'missions', name: '任务发布' },
+    { id: 'settings', name: '设置' }
+  ];
 
   return (
     <div className="app-container">
