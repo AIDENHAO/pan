@@ -1,0 +1,698 @@
+/* ========================================
+ * 主题颜色变量定义文件
+ * 包含所有主题的CSS变量配置
+ * ======================================== */
+
+/* ========================================
+ * 默认主题 (Default Theme)
+ * 核心气质：温润古典，金色典雅
+ * ======================================== */
+:root {
+  /* 主色调 */
+  --primary-color: #d4a574;
+  --primary-hover: #b8860b;
+  --primary-light: #f0c896;
+  --primary-bg: rgba(212, 165, 116, 0.1);
+  --primary-bg-light: rgba(212, 165, 116, 0.05);
+  --primary-bg-lighter: rgba(212, 165, 116, 0.03);
+  --primary-border: rgba(212, 165, 116, 0.2);
+  --primary-shadow: rgba(212, 165, 116, 0.2);
+  --primary-text-shadow: rgba(212, 165, 116, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #1a2332;
+  --sidebar-text: #fff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-hover: rgba(255, 255, 255, 0.2);
+  --sidebar-active: rgba(255, 255, 255, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #f0f2f5;
+  --bg-secondary: #f5f5f5;
+  --bg-white: #fff;
+  --bg-card: #fff;
+  --bg-hover: #f8f8f8;
+  --bg-light: #f9f9f9;
+  
+  /* 文字颜色 */
+  --text-primary: #1a2332;
+  --text-secondary: #8c9196;
+  --text-light: #666;
+  --text-lighter: #666666;
+  --text-dark: #333;
+  --text-muted: #555;
+  
+  /* 边框颜色 */
+  --border-light: #f0f0f0;
+  --border-lighter: #f8f8f8;
+  --border-default: #e8e8e8;
+  --border-input: #ddd;
+  
+  /* 阴影 */
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.08);
+  --shadow-dark: rgba(0, 0, 0, 0.1);
+  --shadow-darker: rgba(0, 0, 0, 0.15);
+  
+  /* 状态颜色 */
+  --success-bg: #e8f5e9;
+  --success-color: #388e3c;
+  --info-bg: #e3f2fd;
+  --info-color: #1976d2;
+  --warning-bg: #fff3e0;
+  --warning-color: #f57c00;
+  --error-color: #dc3545;
+  
+  /* 进度条颜色 */
+  --progress-bg: #f3f3f3;
+  --progress-color: #3498db;
+  
+  /* 按钮颜色 */
+  --btn-disabled-bg: #cccccc;
+  --btn-disabled-text: #666666;
+  
+  /* 滑块颜色 */
+  --slider-track: #ddd;
+  --slider-thumb: var(--primary-color);
+  
+  /* 功法等级颜色 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 */
+  --text-muted-light: #7f8c8d;
+  --border-light-gray: #e0e0e0;
+  --bg-light-gray: #f8f9fa;
+  --bg-very-light: #ecf0f1;
+  --text-dark-blue: #2c3e50;
+  --text-medium-gray: #34495e;
+  --text-gray: #495057;
+  --text-light-gray: #6c757d;
+  --text-dark-gray: #555;
+  --bg-info-light: #e8f4fd;
+  --border-info: #3498db;
+  --color-danger: #e74c3c;
+  --bg-danger-light: #fff5f5;
+  --bg-danger-lighter: #ffe0e0;
+  --btn-primary: #3498db;
+  --btn-primary-hover: #2980b9;
+}
+
+/* ========================================
+ * 深色主题 (Dark Theme)
+ * 核心气质：神秘深邃，金辉夜色
+ * ======================================== */
+[data-theme="dark"] {
+  --primary-color: #ffd700;
+  --primary-hover: #ffed4e;
+  --primary-light: #fff176;
+  --primary-bg: rgba(255, 215, 0, 0.1);
+  --primary-bg-light: rgba(255, 215, 0, 0.05);
+  --primary-bg-lighter: rgba(255, 215, 0, 0.03);
+  --primary-border: rgba(255, 215, 0, 0.2);
+  --primary-shadow: rgba(255, 215, 0, 0.2);
+  --primary-text-shadow: rgba(255, 215, 0, 0.3);
+  
+  --sidebar-bg: #2d3748;
+  --sidebar-text: #e2e8f0;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-hover: rgba(255, 255, 255, 0.1);
+  --sidebar-active: rgba(255, 255, 255, 0.2);
+  
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --bg-white: #2d3748;
+  --bg-card: #4a5568;
+  --bg-hover: #4a5568;
+  --bg-light: #2d3748;
+  
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-light: #cbd5e0;
+  --text-lighter: #a0aec0;
+  --text-dark: #e2e8f0;
+  --text-muted: #cbd5e0;
+  
+  --border-light: #4a5568;
+  --border-lighter: #2d3748;
+  --border-default: #4a5568;
+  --border-input: #4a5568;
+  
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+  --shadow-darker: rgba(0, 0, 0, 0.6);
+  
+  /* 功法等级颜色 - 深色主题适配 */
+  --grade-huang: #CD853F;
+  --grade-xuan: #6495ED;
+  --grade-di: #FFD700;
+  --grade-tian: #DDA0DD;
+  --grade-shen: #FF6347;
+  --grade-default: #A0A0A0;
+  
+  /* 通用UI颜色 - 深色主题适配 */
+  --text-muted-light: #a0aec0;
+  --border-light-gray: #4a5568;
+  --bg-light-gray: #2d3748;
+  --bg-very-light: #4a5568;
+  --text-dark-blue: #e2e8f0;
+  --text-medium-gray: #cbd5e0;
+  --text-gray: #a0aec0;
+  --text-light-gray: #a0aec0;
+  --text-dark-gray: #cbd5e0;
+  --bg-info-light: #2d3748;
+  --border-info: #3182ce;
+  --color-danger: #f56565;
+  --bg-danger-light: #2d1b1b;
+  --bg-danger-lighter: #3d2b2b;
+  --btn-primary: #3182ce;
+  --btn-primary-hover: #2c5aa0;
+}
+
+/* ========================================
+ * 蓝色主题 (Blue Theme)
+ * 核心气质：清新理性，科技现代
+ * ======================================== */
+[data-theme="blue"] {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: #60a5fa;
+  --primary-bg: rgba(59, 130, 246, 0.1);
+  --primary-bg-light: rgba(59, 130, 246, 0.05);
+  --primary-bg-lighter: rgba(59, 130, 246, 0.03);
+  --primary-border: rgba(59, 130, 246, 0.2);
+  --primary-shadow: rgba(59, 130, 246, 0.2);
+  --primary-text-shadow: rgba(59, 130, 246, 0.3);
+  
+  /* 功法等级颜色 - 蓝色主题 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 - 蓝色主题 */
+  --text-muted-light: #7f8c8d;
+  --border-light-gray: #e0e0e0;
+  --bg-light-gray: #f8f9fa;
+  --bg-very-light: #ecf0f1;
+  --text-dark-blue: #2c3e50;
+  --text-medium-gray: #34495e;
+  --text-gray: #495057;
+  --text-light-gray: #6c757d;
+  --text-dark-gray: #555;
+  --bg-info-light: #e8f4fd;
+  --border-info: #3b82f6;
+  --color-danger: #e74c3c;
+  --bg-danger-light: #fff5f5;
+  --bg-danger-lighter: #ffe0e0;
+  --btn-primary: #3b82f6;
+  --btn-primary-hover: #2563eb;
+}
+
+/* ========================================
+ * 绿色主题 (Green Theme)
+ * 核心气质：自然生机，清新活力
+ * ======================================== */
+[data-theme="green"] {
+  --primary-color: #10b981;
+  --primary-hover: #059669;
+  --primary-light: #34d399;
+  --primary-bg: rgba(16, 185, 129, 0.1);
+  --primary-bg-light: rgba(16, 185, 129, 0.05);
+  --primary-bg-lighter: rgba(16, 185, 129, 0.03);
+  --primary-border: rgba(16, 185, 129, 0.2);
+  --primary-shadow: rgba(16, 185, 129, 0.2);
+  --primary-text-shadow: rgba(16, 185, 129, 0.3);
+  
+  /* 功法等级颜色 - 绿色主题 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 - 绿色主题 */
+  --text-muted-light: #7f8c8d;
+  --border-light-gray: #e0e0e0;
+  --bg-light-gray: #f8f9fa;
+  --bg-very-light: #ecf0f1;
+  --text-dark-blue: #2c3e50;
+  --text-medium-gray: #34495e;
+  --text-gray: #495057;
+  --text-light-gray: #6c757d;
+  --text-dark-gray: #555;
+  --bg-info-light: #e8f4fd;
+  --border-info: #10b981;
+  --color-danger: #e74c3c;
+  --bg-danger-light: #fff5f5;
+  --bg-danger-lighter: #ffe0e0;
+  --btn-primary: #10b981;
+  --btn-primary-hover: #059669;
+}
+
+/* ========================================
+ * 紫色主题 (Purple Theme)
+ * 核心气质：神秘优雅，贵族气质
+ * ======================================== */
+[data-theme="purple"] {
+  --primary-color: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --primary-light: #a78bfa;
+  --primary-bg: rgba(139, 92, 246, 0.1);
+  --primary-bg-light: rgba(139, 92, 246, 0.05);
+  --primary-bg-lighter: rgba(139, 92, 246, 0.03);
+  --primary-border: rgba(139, 92, 246, 0.2);
+  --primary-shadow: rgba(139, 92, 246, 0.2);
+  --primary-text-shadow: rgba(139, 92, 246, 0.3);
+  
+  /* 功法等级颜色 - 紫色主题 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 - 紫色主题 */
+  --text-muted-light: #7f8c8d;
+  --border-light-gray: #e0e0e0;
+  --bg-light-gray: #f8f9fa;
+  --bg-very-light: #ecf0f1;
+  --text-dark-blue: #2c3e50;
+  --text-medium-gray: #34495e;
+  --text-gray: #495057;
+  --text-light-gray: #6c757d;
+  --text-dark-gray: #555;
+  --bg-info-light: #e8f4fd;
+  --border-info: #8b5cf6;
+  --color-danger: #e74c3c;
+  --bg-danger-light: #fff5f5;
+  --bg-danger-lighter: #ffe0e0;
+  --btn-primary: #8b5cf6;
+  --btn-primary-hover: #7c3aed;
+}
+
+/* ========================================
+ * 蔚蓝圣洁主题 (Azure Holy Theme)
+ * 核心气质：天空般的纯净与宁静
+ * ======================================== */
+[data-theme="azure-holy"] {
+  /* 主色调 */
+  --primary-color: #4DA6FF;
+  --primary-hover: #2980B9;
+  --primary-light: #A8DADC;
+  --primary-bg: rgba(77, 166, 255, 0.1);
+  --primary-bg-light: rgba(77, 166, 255, 0.05);
+  --primary-bg-lighter: rgba(77, 166, 255, 0.03);
+  --primary-border: rgba(77, 166, 255, 0.2);
+  --primary-shadow: rgba(77, 166, 255, 0.2);
+  --primary-text-shadow: rgba(77, 166, 255, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #2980B9;
+  --sidebar-text: #F5F9FF;
+  --sidebar-border: rgba(245, 249, 255, 0.1);
+  --sidebar-hover: rgba(245, 249, 255, 0.1);
+  --sidebar-active: rgba(168, 218, 220, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #E6F4FF;
+  --bg-secondary: #F5F9FF;
+  --bg-white: #F5F9FF;
+  --bg-card: #F5F9FF;
+  --bg-hover: #E6F4FF;
+  --bg-light: #F5F9FF;
+  
+  /* 文字颜色 */
+  --text-primary: #1A3A59;
+  --text-secondary: #7B9BBE;
+  --text-light: #7B9BBE;
+  --text-lighter: #7B9BBE;
+  --text-dark: #1A3A59;
+  --text-muted: #7B9BBE;
+  
+  /* 边框颜色 */
+  --border-light: #A8DADC;
+  --border-lighter: #E6F4FF;
+  --border-default: #2980B9;
+  --border-input: #2980B9;
+  
+  /* 功法等级颜色 - 蔚蓝圣洁主题 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 - 蔚蓝圣洁主题 */
+  --text-muted-light: #7B9BBE;
+  --border-light-gray: #A8DADC;
+  --bg-light-gray: #E6F4FF;
+  --bg-very-light: #F5F9FF;
+  --text-dark-blue: #1A3A59;
+  --text-medium-gray: #7B9BBE;
+  --text-gray: #7B9BBE;
+  --text-light-gray: #7B9BBE;
+  --text-dark-gray: #1A3A59;
+  --bg-info-light: #E6F4FF;
+  --border-info: #4DA6FF;
+  --color-danger: #DC2626;
+  --bg-danger-light: #FEE2E2;
+  --bg-danger-lighter: #FECACA;
+  --btn-primary: #4DA6FF;
+  --btn-primary-hover: #2980B9;
+}
+
+/* ========================================
+ * 白金圣洁主题 (Platinum Holy Theme)
+ * 核心气质：纯洁高贵，白金光辉
+ * ======================================== */
+[data-theme="platinum-holy"] {
+  /* 主色调 */
+  --primary-color: #D4AF37;
+  --primary-hover: #FFD700;
+  --primary-light: #FFD700;
+  --primary-bg: rgba(212, 175, 55, 0.1);
+  --primary-bg-light: rgba(212, 175, 55, 0.05);
+  --primary-bg-lighter: rgba(212, 175, 55, 0.03);
+  --primary-border: rgba(212, 175, 55, 0.2);
+  --primary-shadow: rgba(212, 175, 55, 0.2);
+  --primary-text-shadow: rgba(212, 175, 55, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #E5E7EB;
+  --sidebar-text: #111827;
+  --sidebar-border: rgba(17, 24, 39, 0.1);
+  --sidebar-hover: rgba(17, 24, 39, 0.1);
+  --sidebar-active: rgba(255, 215, 0, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FEFEFE;
+  --bg-white: #FEFEFE;
+  --bg-card: #FEFEFE;
+  --bg-hover: #F8FAFC;
+  --bg-light: #FEFEFE;
+  
+  /* 文字颜色 */
+  --text-primary: #111827;
+  --text-secondary: #9CA3AF;
+  --text-light: #9CA3AF;
+  --text-lighter: #9CA3AF;
+  --text-dark: #111827;
+  --text-muted: #9CA3AF;
+  
+  /* 边框颜色 */
+  --border-light: #E5E7EB;
+  --border-lighter: #F8FAFC;
+  --border-default: #D4AF37;
+  --border-input: #D4AF37;
+  
+  /* 功法等级颜色 - 白金圣洁主题 */
+  --grade-huang: #8B4513;
+  --grade-xuan: #4169E1;
+  --grade-di: #FFD700;
+  --grade-tian: #9370DB;
+  --grade-shen: #FF4500;
+  --grade-default: #666;
+  
+  /* 通用UI颜色 - 白金圣洁主题 */
+  --text-muted-light: #9CA3AF;
+  --border-light-gray: #E5E7EB;
+  --bg-light-gray: #F8FAFC;
+  --bg-very-light: #F3F4F6;
+  --text-dark-blue: #111827;
+  --text-medium-gray: #6B7280;
+  --text-gray: #6B7280;
+  --text-light-gray: #9CA3AF;
+  --text-dark-gray: #374151;
+  --bg-info-light: #EFF6FF;
+  --border-info: #D4AF37;
+  --color-danger: #DC2626;
+  --bg-danger-light: #FEF2F2;
+  --bg-danger-lighter: #FEE2E2;
+  --btn-primary: #D4AF37;
+  --btn-primary-hover: #B59106;
+}
+
+/* ========================================
+ * 炙热火焰主题 (Blazing Flame Theme)
+ * 核心气质：烈火般的激情与力量
+ * ======================================== */
+[data-theme="blazing-flame"] {
+  /* 主色调 */
+  --primary-color: #DC2626;
+  --primary-hover: #F97316;
+  --primary-light: #FBBF24;
+  --primary-bg: rgba(220, 38, 38, 0.1);
+  --primary-bg-light: rgba(220, 38, 38, 0.05);
+  --primary-bg-lighter: rgba(220, 38, 38, 0.03);
+  --primary-border: rgba(220, 38, 38, 0.2);
+  --primary-shadow: rgba(220, 38, 38, 0.2);
+  --primary-text-shadow: rgba(220, 38, 38, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #1F0A0A;
+  --sidebar-text: #FEF3C7;
+  --sidebar-border: rgba(254, 243, 199, 0.1);
+  --sidebar-hover: rgba(254, 243, 199, 0.1);
+  --sidebar-active: rgba(251, 191, 36, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #1F0A0A;
+  --bg-secondary: #2D1B1B;
+  --bg-white: #2D1B1B;
+  --bg-card: #3D2B2B;
+  --bg-hover: #3D2B2B;
+  --bg-light: #2D1B1B;
+  
+  /* 文字颜色 */
+  --text-primary: #FEF3C7;
+  --text-secondary: #C2410C;
+  --text-light: #C2410C;
+  --text-lighter: #C2410C;
+  --text-dark: #FEF3C7;
+  --text-muted: #C2410C;
+  
+  /* 边框颜色 */
+  --border-light: #F97316;
+  --border-lighter: #2D1B1B;
+  --border-default: #DC2626;
+  --border-input: #DC2626;
+  
+  /* 阴影 */
+  --shadow-light: rgba(220, 38, 38, 0.2);
+  --shadow-medium: rgba(220, 38, 38, 0.3);
+  --shadow-dark: rgba(220, 38, 38, 0.4);
+  --shadow-darker: rgba(220, 38, 38, 0.5);
+  
+  /* 功法等级颜色 - 炙热火焰主题 */
+  --grade-huang: #CD853F;
+  --grade-xuan: #4682B4;
+  --grade-di: #FFD700;
+  --grade-tian: #DDA0DD;
+  --grade-shen: #FF4500;
+  --grade-default: #C2410C;
+  
+  /* 通用UI颜色 - 炙热火焰主题 */
+  --text-muted-light: #C2410C;
+  --border-light-gray: #F97316;
+  --bg-light-gray: #2D1B1B;
+  --bg-very-light: #3D2B2B;
+  --text-dark-blue: #FEF3C7;
+  --text-medium-gray: #C2410C;
+  --text-gray: #C2410C;
+  --text-light-gray: #C2410C;
+  --text-dark-gray: #FEF3C7;
+  --bg-info-light: #2D1B1B;
+  --border-info: #DC2626;
+  --color-danger: #F97316;
+  --bg-danger-light: #1F0A0A;
+  --bg-danger-lighter: #2D1B1B;
+  --btn-primary: #DC2626;
+  --btn-primary-hover: #F97316;
+}
+
+/* ========================================
+ * 苍林生机主题 (Forest Vitality Theme)
+ * 核心气质：森林般的生机与活力
+ * ======================================== */
+[data-theme="forest-vitality"] {
+  /* 主色调 */
+  --primary-color: #166534;
+  --primary-hover: #10B981;
+  --primary-light: #A7F3D0;
+  --primary-bg: rgba(22, 101, 52, 0.1);
+  --primary-bg-light: rgba(22, 101, 52, 0.05);
+  --primary-bg-lighter: rgba(22, 101, 52, 0.03);
+  --primary-border: rgba(22, 101, 52, 0.2);
+  --primary-shadow: rgba(22, 101, 52, 0.2);
+  --primary-text-shadow: rgba(22, 101, 52, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #166534;
+  --sidebar-text: #F0FDF4;
+  --sidebar-border: rgba(240, 253, 244, 0.1);
+  --sidebar-hover: rgba(240, 253, 244, 0.1);
+  --sidebar-active: rgba(16, 185, 129, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #F0FDF4;
+  --bg-secondary: #F0FDF4;
+  --bg-white: #F0FDF4;
+  --bg-card: #A7F3D0;
+  --bg-hover: #A7F3D0;
+  --bg-light: #F0FDF4;
+  
+  /* 文字颜色 */
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --text-light: #64748B;
+  --text-lighter: #64748B;
+  --text-dark: #1E293B;
+  --text-muted: #64748B;
+  
+  /* 边框颜色 */
+  --border-light: #A7F3D0;
+  --border-lighter: #F0FDF4;
+  --border-default: #4B5563;
+  --border-input: #4B5563;
+}
+
+/* ========================================
+ * 深蓝大海主题 (Deep Ocean Theme)
+ * 核心气质：深海般的神秘与深邃
+ * ======================================== */
+[data-theme="deep-ocean"] {
+  /* 主色调 */
+  --primary-color: #1E40AF;
+  --primary-hover: #3B82F6;
+  --primary-light: #60A5FA;
+  --primary-bg: rgba(30, 64, 175, 0.1);
+  --primary-bg-light: rgba(30, 64, 175, 0.05);
+  --primary-bg-lighter: rgba(30, 64, 175, 0.03);
+  --primary-border: rgba(30, 64, 175, 0.2);
+  --primary-shadow: rgba(30, 64, 175, 0.2);
+  --primary-text-shadow: rgba(30, 64, 175, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #0F172A;
+  --sidebar-text: #F1F5F9;
+  --sidebar-border: rgba(241, 245, 249, 0.1);
+  --sidebar-hover: rgba(241, 245, 249, 0.1);
+  --sidebar-active: rgba(96, 165, 250, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #0F172A;
+  --bg-secondary: #1E293B;
+  --bg-white: #1E293B;
+  --bg-card: #0A2463;
+  --bg-hover: #0A2463;
+  --bg-light: #1E293B;
+  
+  /* 文字颜色 */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-light: #94A3B8;
+  --text-lighter: #94A3B8;
+  --text-dark: #F1F5F9;
+  --text-muted: #94A3B8;
+  
+  /* 边框颜色 */
+  --border-light: #0A2463;
+  --border-lighter: #1E293B;
+  --border-default: #3B82F6;
+  --border-input: #3B82F6;
+  
+  /* 阴影 */
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+  --shadow-darker: rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+ * 黑金土壤主题 (Black Gold Soil Theme)
+ * 核心气质：大地般的厚重与金色光辉
+ * ======================================== */
+[data-theme="black-gold-soil"] {
+  /* 主色调 */
+  --primary-color: #B49106;
+  --primary-hover: #D4AF37;
+  --primary-light: #D4AF37;
+  --primary-bg: rgba(180, 145, 6, 0.1);
+  --primary-bg-light: rgba(180, 145, 6, 0.05);
+  --primary-bg-lighter: rgba(180, 145, 6, 0.03);
+  --primary-border: rgba(180, 145, 6, 0.2);
+  --primary-shadow: rgba(180, 145, 6, 0.2);
+  --primary-text-shadow: rgba(180, 145, 6, 0.3);
+  
+  /* 侧边栏颜色 */
+  --sidebar-bg: #121212;
+  --sidebar-text: #F5F5F4;
+  --sidebar-border: rgba(245, 245, 244, 0.1);
+  --sidebar-hover: rgba(245, 245, 244, 0.1);
+  --sidebar-active: rgba(180, 145, 6, 0.3);
+  
+  /* 背景颜色 */
+  --bg-primary: #121212;
+  --bg-secondary: #1A1A1A;
+  --bg-white: #1A1A1A;
+  --bg-card: #27272A;
+  --bg-hover: #27272A;
+  --bg-light: #1A1A1A;
+  
+  /* 文字颜色 */
+  --text-primary: #F5F5F4;
+  --text-secondary: #A8A29E;
+  --text-light: #A8A29E;
+  --text-lighter: #A8A29E;
+  --text-dark: #F5F5F4;
+  --text-muted: #A8A29E;
+  
+  /* 边框颜色 */
+  --border-light: #5A4B1F;
+  --border-lighter: #27272A;
+  --border-default: #8B4513;
+  --border-input: #8B4513;
+  
+  /* 阴影 */
+  --shadow-light: rgba(0, 0, 0, 0.4);
+  --shadow-medium: rgba(0, 0, 0, 0.5);
+  --shadow-dark: rgba(0, 0, 0, 0.6);
+  --shadow-darker: rgba(0, 0, 0, 0.7);
+}
+
+/* ========================================
+ * 主题过渡动画
+ * 为主题切换提供平滑的过渡效果
+ * ======================================== */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-container {
+  transition: background-color 0.3s ease;
+}
+
+.sidebar {
+  transition: all 0.3s ease;
+}
+
+/* 所有使用CSS变量的元素都添加过渡效果 */
+* {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}

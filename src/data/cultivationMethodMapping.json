@@ -1,0 +1,202 @@
+{
+  "1": {
+    "id": 1,
+    "name": "青云剑诀",
+    "type": "剑法",
+    "grade": "黄级上品",
+    "description": "青云宗传承剑法，以轻灵飘逸著称，适合初学者修炼",
+    "requiredRealmLevel": 1,
+    "maxLevel": 10,
+    "attributes": {
+      "attack": 15,
+      "speed": 20,
+      "defense": 5,
+      "criticalRate": 0.1
+    },
+    "cultivationRequirements": {
+      "minPhysique": 10,
+      "minSoul": 8,
+      "requiredResources": ["灵石", "剑心草"]
+    }
+  },
+  "2": {
+    "id": 2,
+    "name": "御剑术",
+    "type": "御器",
+    "grade": "黄级中品",
+    "description": "基础御剑之法，可操控飞剑攻击敌人",
+    "requiredRealmLevel": 2,
+    "maxLevel": 8,
+    "attributes": {
+      "attack": 25,
+      "speed": 15,
+      "defense": 8,
+      "criticalRate": 0.15
+    },
+    "cultivationRequirements": {
+      "minPhysique": 15,
+      "minSoul": 12,
+      "requiredResources": ["灵石", "御剑符"]
+    }
+  },
+  "3": {
+    "id": 3,
+    "name": "清心诀",
+    "type": "心法",
+    "grade": "黄级下品",
+    "description": "静心凝神的基础心法，有助于修炼时保持心境平和",
+    "requiredRealmLevel": 1,
+    "maxLevel": 6,
+    "attributes": {
+      "attack": 0,
+      "speed": 5,
+      "defense": 15,
+      "criticalRate": 0.05
+    },
+    "cultivationRequirements": {
+      "minPhysique": 8,
+      "minSoul": 15,
+      "requiredResources": ["静心香", "清心丹"]
+    }
+  },
+  "4": {
+    "id": 4,
+    "name": "烈火掌",
+    "type": "掌法",
+    "grade": "玄级下品",
+    "description": "蕴含火属性灵力的掌法，攻击时带有灼烧效果",
+    "requiredRealmLevel": 7,
+    "maxLevel": 12,
+    "attributes": {
+      "attack": 35,
+      "speed": 12,
+      "defense": 10,
+      "criticalRate": 0.2
+    },
+    "cultivationRequirements": {
+      "minPhysique": 50,
+      "minSoul": 30,
+      "requiredResources": ["火灵石", "烈焰花"]
+    }
+  },
+  "5": {
+    "id": 5,
+    "name": "寒冰诀",
+    "type": "法术",
+    "grade": "玄级中品",
+    "description": "操控寒冰之力的法术，可冰封敌人",
+    "requiredRealmLevel": 8,
+    "maxLevel": 15,
+    "attributes": {
+      "attack": 30,
+      "speed": 18,
+      "defense": 12,
+      "criticalRate": 0.18
+    },
+    "cultivationRequirements": {
+      "minPhysique": 40,
+      "minSoul": 45,
+      "requiredResources": ["寒冰石", "雪莲花"]
+    }
+  },
+  "6": {
+    "id": 6,
+    "name": "金刚不坏身",
+    "type": "体修",
+    "grade": "地级下品",
+    "description": "强化肉身的体修功法，大幅提升防御力",
+    "requiredRealmLevel": 16,
+    "maxLevel": 20,
+    "attributes": {
+      "attack": 20,
+      "speed": 8,
+      "defense": 50,
+      "criticalRate": 0.1
+    },
+    "cultivationRequirements": {
+      "minPhysique": 100,
+      "minSoul": 60,
+      "requiredResources": ["金刚石", "体魄丹"]
+    }
+  },
+  "7": {
+    "id": 7,
+    "name": "九天雷诀",
+    "type": "雷法",
+    "grade": "地级上品",
+    "description": "召唤天雷攻击的强大法术，威力巨大",
+    "requiredRealmLevel": 19,
+    "maxLevel": 25,
+    "attributes": {
+      "attack": 60,
+      "speed": 25,
+      "defense": 15,
+      "criticalRate": 0.3
+    },
+    "cultivationRequirements": {
+      "minPhysique": 80,
+      "minSoul": 120,
+      "requiredResources": ["雷灵石", "九天神雷符"]
+    }
+  },
+  "8": {
+    "id": 8,
+    "name": "太极玄功",
+    "type": "内功",
+    "grade": "天级下品",
+    "description": "阴阳调和的高深内功，可大幅提升修炼速度",
+    "requiredRealmLevel": 25,
+    "maxLevel": 30,
+    "attributes": {
+      "attack": 40,
+      "speed": 30,
+      "defense": 35,
+      "criticalRate": 0.25
+    },
+    "cultivationRequirements": {
+      "minPhysique": 200,
+      "minSoul": 250,
+      "requiredResources": ["太极石", "阴阳丹"]
+    }
+  },
+  "9": {
+    "id": 9,
+    "name": "万剑归宗",
+    "type": "剑阵",
+    "grade": "天级上品",
+    "description": "剑道至高绝学，可操控万剑形成剑阵",
+    "requiredRealmLevel": 30,
+    "maxLevel": 50,
+    "attributes": {
+      "attack": 100,
+      "speed": 40,
+      "defense": 25,
+      "criticalRate": 0.4
+    },
+    "cultivationRequirements": {
+      "minPhysique": 300,
+      "minSoul": 400,
+      "requiredResources": ["剑心石", "万剑符"]
+    }
+  },
+  "10": {
+    "id": 10,
+    "name": "混沌神诀",
+    "type": "神级功法",
+    "grade": "神级",
+    "description": "传说中的混沌功法，修炼至大成可掌控天地法则",
+    "requiredRealmLevel": 40,
+    "maxLevel": 100,
+    "attributes": {
+      "attack": 200,
+      "speed": 80,
+      "defense": 100,
+      "criticalRate": 0.5
+    },
+    "cultivationRequirements": {
+      "minPhysique": 1000,
+      "minSoul": 1500,
+      "requiredResources": ["混沌石", "神级丹药"]
+    }
+  }
+}

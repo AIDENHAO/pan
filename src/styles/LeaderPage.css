@@ -1,0 +1,306 @@
+/* 掌门信息页面样式 - Leader Page Styles */
+
+/* 1. 页面容器样式 - Page Container Styles */
+.leader-info-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 2. 掌门头部信息样式 - Leader Header Styles */
+.leader-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(to right, var(--primary-bg-lighter), transparent);
+  padding-left: 20px;
+  border-radius: 12px;
+}
+
+.leader-avatar {
+  margin-right: 24px;
+}
+
+.avatar-frame {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: var(--bg-white);
+  box-shadow: 0 4px 12px var(--primary-shadow);
+}
+
+.leader-basic-info h3 {
+  font-size: 28px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-left: 12px;
+  font-weight: normal;
+}
+
+.position {
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+/* 3. 统计卡片样式 - Stats Card Styles */
+.leader-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  /* 将内容从顶部开始排列而非居中 */
+  justify-content: flex-start;
+  /* 增加最小高度以确保有足够空间垂直居中内容 */
+  min-height: 200px;
+}
+
+.stat-card h4 {
+  font-size: 16px;
+  color: var(--text-secondary);
+  /* 调整h4的margin来改变相对位置 */
+  margin-top: 0;
+  margin-bottom: 20px;
+  /* 添加padding来调整内部位置 */
+  padding-left: 5px;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+/* 4. 境界显示样式 - Realm Display Styles */
+.realm-display {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  /* 添加margin使内容垂直居中 */
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* 5. 修炼进度条样式 - Cultivation Progress Styles */
+.cultivation-bar {
+  height: 12px;
+  background-color: var(--border-light);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.cultivation-value {
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* 6. 修炼控制按钮样式 - Cultivation Controls Styles */
+.cultivation-controls {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--primary-bg-light);
+  border-radius: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.start-btn, .stop-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  box-shadow: 0 2px 5px var(--shadow-dark);
+  flex-shrink: 0;
+}
+
+.start-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.start-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.start-btn:disabled {
+  background-color: var(--btn-disabled-bg);
+  color: var(--btn-disabled-text);
+  cursor: not-allowed;
+}
+
+.stop-btn {
+  background-color: var(--primary-hover);
+  color: white;
+}
+
+.stop-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.max-reached {
+  color: var(--warning-color);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* 7. 技能列表样式 - Skills List Styles */
+.leader-skills h4 {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-tag {
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid var(--primary-border);
+}
+
+/* 8. 境界详情样式 - Realm Details Styles */
+.realm-level {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.realm-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 0 1px 3px var(--primary-shadow);
+  margin-bottom: 8px;
+}
+
+.realm-details {
+  font-size: 14px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* 9. 掌门详情样式 - Leader Details Styles */
+.leader-details {
+  margin-top: 32px;
+  padding: 20px;
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.leader-details h4 {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 8px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.value {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+/* 10. 响应式样式 - Responsive Styles */
+@media (max-width: 768px) {
+  .cultivation-controls {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .start-btn, .stop-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .leader-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .leader-avatar {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .leader-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .realm-display {
+    font-size: 24px;
+  }
+
+  .realm-level, .realm-name {
+    text-align: center;
+  }
+}

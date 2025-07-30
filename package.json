@@ -5,19 +5,27 @@
   "description": "React TypeScript on CloudStudio, using Vite bundler",
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "tsc && vite build --port 3000",
-    "preview": "vite preview --port 3000"
+    "build": "tsc && vite build",
+    "preview": "vite preview --port 3000",
+    "server": "ts-node --esm src/server/server.ts",
+    "server:old": "node src/server/server.js",
+    "server:dev": "NODE_ENV=development ts-node --esm src/server/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^4.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5",
     "vite": "^3.0.4"
   },
   "dependencies": {
@@ -25,6 +33,6 @@
     "antd": "^5.26.6",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "react-router-dom": "^7.7.1"
+    "react-router-dom": "^6.30.1"
   }
 }

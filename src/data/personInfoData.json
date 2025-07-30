@@ -1,0 +1,21 @@
+{
+  "id": "leader_001",
+  "name": "张青云",
+  "title": "青云真人",
+  "realmLevel": 66,
+  "cultivationValue": 4,
+  "cultivationLimitAdd": 0,
+  "cultivationOverLimit": false,
+  "talentValue": 0,
+  "position": 9,
+  "joinDate": "天历302年",
+  "skills": [
+    "青云剑诀",
+    "御剑术",
+    "清心诀"
+  ],
+  "canBreakthrough": true,
+  "breakthroughEnabled": true,
+  "breakthroughCooldown": 0,
+  "lastBreakthroughTime": "2025-07-29T13:35:42.962Z"
+}

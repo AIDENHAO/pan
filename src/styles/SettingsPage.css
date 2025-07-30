@@ -1,0 +1,317 @@
+/* 宗门设置页面样式 - Settings Page Styles */
+
+/* 1. 页面容器样式 - Page Container Styles */
+.settings-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 2. 页面头部样式 - Page Header Styles */
+.page-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(to right, var(--primary-bg-lighter), transparent);
+  padding-left: 20px;
+  border-radius: 12px;
+}
+
+.page-header h2 {
+  font-size: 28px;
+  color: var(--primary-color) !important;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px var(--primary-text-shadow);
+}
+
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* 3. 设置内容样式 - Settings Content Styles */
+.settings-content {
+  margin-bottom: 32px;
+}
+
+/* 4. 设置组样式 - Setting Group Styles */
+.setting-group {
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.setting-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.group-header {
+  background: linear-gradient(135deg, var(--primary-bg), var(--primary-bg-light));
+  padding: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.group-header h3 {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.group-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0;
+}
+
+.group-items {
+  padding: 0;
+}
+
+/* 5. 设置项样式 - Setting Item Styles */
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-lighter);
+  transition: background-color 0.3s ease;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item:hover {
+  background-color: var(--primary-bg-lighter);
+}
+
+.setting-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.setting-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.setting-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.setting-control {
+  flex-shrink: 0;
+}
+
+/* 6. 设置控件样式 - Setting Controls Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--btn-disabled-bg);
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* 7. 页面头部特殊样式 - Special Page Header Styles */
+.settings-container .page-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color) !important;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--primary-text-shadow);
+}
+
+/* 8. Select下拉框样式 - Select Dropdown Styles */
+.setting-select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  background-color: var(--bg-white);
+  color: var(--text-primary);
+  font-size: 14px;
+  min-width: 150px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.setting-select:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-bg-light);
+}
+
+.setting-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+/* 主题下拉框特殊样式 */
+.theme-dropdown-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.theme-dropdown {
+  min-width: 180px;
+}
+
+.theme-preview-container {
+  flex-shrink: 0;
+}
+
+/* 输入框样式 */
+.setting-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border-input);
+  border-radius: 6px;
+  background-color: var(--bg-white);
+  color: var(--text-primary);
+  font-size: 14px;
+  min-width: 150px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.setting-input:hover {
+  border-color: var(--primary-color);
+}
+
+.setting-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+
+/* 滑块样式 */
+.setting-slider {
+  width: 150px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--slider-track);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.setting-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  box-shadow: 0 2px 4px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.setting-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+.setting-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.setting-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+/* 9. 响应式样式 - Responsive Styles */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 15px;
+  }
+
+  .settings-group {
+    margin-bottom: 20px;
+  }
+
+  .setting-item {
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .setting-info {
+    margin-right: 0;
+  }
+
+  .setting-control {
+    width: 100%;
+  }
+
+  .setting-select,
+  .setting-input {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .theme-dropdown-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .theme-dropdown {
+    width: 100%;
+    min-width: unset;
+  }
+}

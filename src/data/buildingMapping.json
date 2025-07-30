@@ -1,0 +1,82 @@
+{
+  "1": {
+    "name": "主殿",
+    "type": "核心建筑",
+    "level": 5,
+    "description": "宗门的核心建筑，处理重要事务",
+    "capacity": 100,
+    "cost": 10000
+  },
+  "2": {
+    "name": "练功房",
+    "type": "修炼建筑",
+    "level": 3,
+    "description": "弟子修炼的场所，提升修炼效率",
+    "capacity": 50,
+    "cost": 5000
+  },
+  "3": {
+    "name": "藏书阁",
+    "type": "知识建筑",
+    "level": 4,
+    "description": "收藏功法秘籍的地方",
+    "capacity": 30,
+    "cost": 8000
+  },
+  "4": {
+    "name": "炼丹房",
+    "type": "生产建筑",
+    "level": 2,
+    "description": "炼制丹药的场所",
+    "capacity": 20,
+    "cost": 6000
+  },
+  "5": {
+    "name": "器械库",
+    "type": "储存建筑",
+    "level": 3,
+    "description": "存放法器兵器的地方",
+    "capacity": 200,
+    "cost": 4000
+  },
+  "6": {
+    "name": "灵田",
+    "type": "资源建筑",
+    "level": 2,
+    "description": "种植灵草灵药的田地",
+    "capacity": 100,
+    "cost": 3000
+  },
+  "7": {
+    "name": "弟子宿舍",
+    "type": "居住建筑",
+    "level": 2,
+    "description": "弟子居住的地方",
+    "capacity": 80,
+    "cost": 2000
+  },
+  "8": {
+    "name": "护山大阵",
+    "type": "防御建筑",
+    "level": 4,
+    "description": "保护宗门的防御阵法",
+    "capacity": 1,
+    "cost": 15000
+  },
+  "9": {
+    "name": "传送阵",
+    "type": "传送建筑",
+    "level": 3,
+    "description": "连接各地的传送阵法",
+    "capacity": 10,
+    "cost": 12000
+  },
+  "10": {
+    "name": "议事厅",
+    "type": "管理建筑",
+    "level": 3,
+    "description": "长老们商议宗门大事的地方",
+    "capacity": 20,
+    "cost": 7000
+  }
+}

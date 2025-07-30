@@ -1,0 +1,523 @@
+/* 弟子管理页面样式 - Disciples Management Page Styles */
+
+/* 1. 页面容器样式 - Page Container Styles */
+.disciples-page {
+  padding: 24px;
+}
+
+.disciples-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.disciples-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.disciples-list-section {
+  flex: 1;
+}
+
+/* 2. 列表头部样式 - List Header Styles */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.list-header h3 {
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* 3. 统计卡片样式 - Statistics Card Styles */
+.stats-wrapper-card {
+  background-color: var(--bg-light);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px var(--shadow-light);
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.stats-wrapper-card:hover {
+  box-shadow: 0 6px 25px var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
+.stats-card-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stats-card-header h3 {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stats-card-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0;
+  font-style: italic;
+}
+
+.disciples-stats {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+/* 4. 搜索和过滤控件样式 - Search and Filter Controls Styles */
+.disciples-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.search-container {
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-shadow);
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+.filter-container {
+  width: 100%;
+  max-width: 300px;
+}
+
+.status-filter {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.status-filter:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* 5. 弟子表格样式 - Disciples Table Styles */
+.disciples-table {
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  background: linear-gradient(135deg, var(--primary-bg), var(--primary-light-bg));
+  padding: 16px 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-border);
+}
+
+.header-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-cell.sortable {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.header-cell.sortable:hover {
+  color: var(--primary-dark);
+}
+
+.header-cell.active {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.sort-icon {
+  font-size: 14px;
+  opacity: 0.6;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.header-cell.sortable:hover .sort-icon {
+  opacity: 0.8;
+  color: var(--primary-color);
+  background-color: var(--primary-bg);
+  transform: scale(1.1);
+}
+
+.header-cell.active .sort-icon {
+  opacity: 1;
+  color: var(--primary-dark);
+  background-color: var(--primary-light-bg);
+  font-weight: bold;
+  transform: scale(1.15);
+  box-shadow: 0 1px 3px var(--primary-shadow);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.table-row:hover {
+  background-color: var(--hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* 6. 弟子信息样式 - Disciple Information Styles */
+.disciple-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.disciple-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 6px var(--primary-shadow);
+}
+
+.disciple-id {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-left: 48px;
+}
+
+/* 7. 境界信息样式 - Realm Information Styles */
+.realm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.realm-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 0 1px 3px var(--primary-shadow);
+  margin-bottom: 8px;
+}
+
+.realm-level {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* 8. 修为信息样式 - Cultivation Information Styles */
+.cultivation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cultivation-value {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 15px;
+}
+
+.cultivation-bar-mini {
+  width: 80px;
+  height: 6px;
+  background-color: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.cultivation-progress-mini {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* 9. 状态徽章样式 - Status Badge Styles */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.status-badge.status-修炼中,
+.status-badge.修炼中 {
+  background-color: var(--info-bg);
+  color: var(--info-color);
+  border: 1px solid var(--border-info);
+}
+
+.status-badge.status-外出历练,
+.status-badge.外出历练 {
+  background-color: var(--warning-bg);
+  color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+}
+
+.status-badge.status-闭关突破,
+.status-badge.闭关突破 {
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-border);
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 10. 无结果提示样式 - No Results Styles */
+.no-results {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-style: italic;
+}
+
+/* 11. 弟子列表样式 - Disciples List Styles */
+.disciples-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  padding: 16px;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+}
+
+.disciple-card {
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 3px solid var(--primary-color);
+}
+
+.disciple-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px var(--shadow-dark);
+}
+
+.disciple-card h4 {
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.disciple-info p {
+  margin: 8px 0;
+  color: var(--text-muted);
+}
+
+/* 12. 页面头部样式 - Page Header Styles */
+.disciples-container .page-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color) !important;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--primary-text-shadow);
+}
+
+/* 13. 响应式样式 - Responsive Styles */
+@media (max-width: 768px) {
+  .stats-wrapper-card {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .stats-card-header h3 {
+    font-size: 18px;
+  }
+
+  .disciples-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .disciples-main-content {
+    gap: 16px;
+  }
+
+  .disciples-controls {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .filter-container {
+    max-width: none;
+  }
+
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .list-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .results-info {
+    font-size: 0.8rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    padding: 12px 16px;
+  }
+
+  .header-cell {
+    font-size: 12px;
+  }
+
+  .disciple-name {
+    font-size: 14px;
+  }
+
+  .disciple-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .disciple-id {
+    margin-left: 44px;
+  }
+
+  .cultivation-bar-mini {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .disciples-page {
+    padding: 16px;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .table-cell {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .table-row .table-cell:last-child {
+    border-bottom: none;
+  }
+
+  .disciple-name {
+    margin-bottom: 4px;
+  }
+
+  .disciple-id {
+    margin-left: 0;
+  }
+
+  .realm-info,
+  .cultivation-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cultivation-bar-mini {
+    width: 40px;
+  }
+}

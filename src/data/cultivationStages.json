@@ -1,4 +1,5 @@
 [
+  {"stageDivision":"凡人阶段","majorRealm":"引气入体","minorRealm":"未入仙途","stage":"凡人","minValue":0,"maxValue":0,"physique":5,"topLingqi":5,"soul":5,"speedOC":0},
   {"stageDivision":"凡人阶段","majorRealm":"黄级","minorRealm":"练气","stage":"前期","minValue":1,"maxValue":1162,"physique":10,"topLingqi":10,"soul":10,"speedOC":12},
   {"stageDivision":"凡人阶段","majorRealm":"黄级","minorRealm":"练气","stage":"中期","minValue":1163,"maxValue":2324,"physique":13,"topLingqi":15,"soul":12,"speedOC":12},
   {"stageDivision":"凡人阶段","majorRealm":"黄级","minorRealm":"练气","stage":"后期","minValue":2325,"maxValue":3486,"physique":16,"topLingqi":22,"soul":13,"speedOC":12},
