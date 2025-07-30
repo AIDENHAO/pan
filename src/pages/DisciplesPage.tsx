@@ -7,9 +7,9 @@ import '../styles/DisciplesPage.css';
  * 定义弟子的基本信息结构
  */
 interface Disciple {
-  id: number;
-  name: string;
-  realmLevel: number;
+  character_uuid: string;
+  character_name: string;
+  character_realm_Level: number;
   cultivation: number;
   status: string;
   // 前端计算字段
@@ -19,7 +19,7 @@ interface Disciple {
 /**
  * 排序类型枚举
  */
-type SortType = 'name' | 'realmLevel' | 'cultivation' | 'status';
+type SortType = 'character_name' | 'character_realm_Level' | 'cultivation' | 'status';
 type SortOrder = 'asc' | 'desc';
 
 /**
@@ -30,7 +30,7 @@ const DisciplesPage: React.FC = (): React.ReactElement => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [sortType, setSortType] = useState<SortType>('name');
+  const [sortType, setSortType] = useState<SortType>('character_name');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
@@ -76,7 +76,7 @@ const DisciplesPage: React.FC = (): React.ReactElement => {
    */
   const filteredAndSortedDisciples = useMemo(() => {
     let filtered = disciples.filter(disciple => {
-      const matchesSearch = disciple.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      const matchesSearch = disciple.character_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            (disciple.realmName || '').toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || disciple.status === statusFilter;
       return matchesSearch && matchesStatus;
@@ -86,7 +86,7 @@ const DisciplesPage: React.FC = (): React.ReactElement => {
       let aValue: any = a[sortType];
       let bValue: any = b[sortType];
 
-      if (sortType === 'name' || sortType === 'status') {
+      if (sortType === 'character_name' || sortType === 'status') {
         aValue = aValue.toLowerCase();
         bValue = bValue.toLowerCase();
       }
@@ -205,16 +205,16 @@ const DisciplesPage: React.FC = (): React.ReactElement => {
             <div className="disciples-table">
               <div className="table-header">
                 <div 
-                  className={`header-cell sortable ${sortType === 'name' ? 'active' : ''}`}
-                  onClick={() => handleSort('name')}
+                  className={`header-cell sortable ${sortType === 'character_name' ? 'active' : ''}`}
+                  onClick={() => handleSort('character_name')}
                 >
-                  姓名 <span className="sort-icon">{getSortIcon('name')}</span>
+                  姓名 <span className="sort-icon">{getSortIcon('character_name')}</span>
                 </div>
                 <div 
-                  className={`header-cell sortable ${sortType === 'realmLevel' ? 'active' : ''}`}
-                  onClick={() => handleSort('realmLevel')}
+                  className={`header-cell sortable ${sortType === 'character_realm_Level' ? 'active' : ''}`}
+                  onClick={() => handleSort('character_realm_Level')}
                 >
-                  境界 <span className="sort-icon">{getSortIcon('realmLevel')}</span>
+                  境界 <span className="sort-icon">{getSortIcon('character_realm_Level')}</span>
                 </div>
                 <div 
                   className={`header-cell sortable ${sortType === 'cultivation' ? 'active' : ''}`}
@@ -236,18 +236,18 @@ const DisciplesPage: React.FC = (): React.ReactElement => {
                 </div>
               ) : (
                 filteredAndSortedDisciples.map((disciple) => (
-                  <div key={disciple.id} className="table-row">
+                  <div key={disciple.character_uuid} className="table-row">
                     <div className="table-cell">
                       <div className="disciple-name">
-                        <div className="disciple-avatar">{disciple.name.charAt(0)}</div>
-                        <span>{disciple.name}</span>
+                        <div className="disciple-avatar">{disciple.character_name.charAt(0)}</div>
+                        <span>{disciple.character_name}</span>
                       </div>
-                      <div className="disciple-id">ID: {disciple.id}</div>
+                      <div className="disciple-id">ID: {disciple.character_uuid}</div>
                     </div>
                     <div className="table-cell">
                       <div className="realm-info">
                         <span className="realm-name">{disciple.realmName}</span>
-                        <span className="realm-level">第{disciple.realmLevel}层</span>
+                        <span className="realm-level">第{disciple.character_realm_Level}层</span>
                       </div>
                     </div>
                     <div className="table-cell">

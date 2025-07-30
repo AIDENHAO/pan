@@ -11,6 +11,7 @@ import {
   ComingSoonPage,
   PeopleDisplayPage
 } from './pages';
+import DatabaseManagementPage from './pages/DatabaseManagementPage';
 import { getNavigationIcon } from './components/NavigationIcons';
 import SectLogo from './components/SectLogo';
 
@@ -39,7 +40,7 @@ const navItems: NavItem[] = [
   { id: 'cultivation', label: '修炼功法', iconId: 'cultivation', path: '/cultivation-methods' },
   { id: 'market', label: '交易市场', iconId: 'market', path: '/market' },
   { id: 'events', label: '宗门事件', iconId: 'events', path: '/events' },
-
+  { id: 'database', label: '数据库管理', iconId: 'settings', path: '/database' },
   { id: 'sect-icons', label: '宗门图标', iconId: 'sect-icons', path: '/sect-icons' },
   { id: 'settings', label: '宗门设置', iconId: 'settings', path: '/settings' }
 ];
@@ -175,6 +176,7 @@ const App: React.FC = (): React.ReactElement => {
             />
 
             <Route path="/people-display" element={<PeopleDisplayPage />} />
+            <Route path="/database" element={<DatabaseManagementPage />} />
             <Route path="/sect-icons" element={<SectIconsPage />} />
           </Routes>
         </main>

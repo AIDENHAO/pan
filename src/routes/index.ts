@@ -6,6 +6,7 @@ import { Router } from 'express';
 import { LeaderController } from '../controllers/LeaderController.js';
 import { ZongmenController } from '../controllers/ZongmenController.js';
 import { MappingController } from '../controllers/MappingController.js';
+import databaseRoutes from './databaseRoutes.js';
 
 // 创建路由实例
 const router = Router();
@@ -92,6 +93,11 @@ router.post('/api/mappings/batch', (req, res) => mappingController.getBatchMappi
 
 // 获取映射数据 (兼容旧接口)
 router.post('/api/get-mappings', (req, res) => mappingController.getAllMappings(req, res));
+
+// ==================== 数据库管理路由 ====================
+
+// 数据库管理路由
+router.use('/api/database', databaseRoutes);
 
 // ==================== 健康检查路由 ====================
 

@@ -9,7 +9,11 @@
     "preview": "vite preview --port 3000",
     "server": "ts-node --esm src/server/server.ts",
     "server:old": "node src/server/server.js",
-    "server:dev": "NODE_ENV=development ts-node --esm src/server/server.ts"
+    "server:dev": "NODE_ENV=development ts-node --esm src/server/server.ts",
+    "db:test": "ts-node --esm src/database/test.ts basic",
+    "db:test:full": "ts-node --esm src/database/test.ts full",
+    "db:cleanup": "ts-node --esm src/database/test.ts cleanup",
+    "db:example": "ts-node --esm src/database/examples/usage.ts"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +36,9 @@
     "@ant-design/icons": "^6.0.0",
     "antd": "^5.26.6",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "mysql2": "^3.6.5",
     "react-router-dom": "^6.30.1"
   }
 }

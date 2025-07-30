@@ -1,0 +1,79 @@
+
+================================================================================
+DAL层CRUD功能测试报告
+生成时间: 7/30/2025, 8:22:31 AM
+================================================================================
+
+📊 测试统计:
+   总测试数: 9
+   通过数: 1
+   失败数: 8
+   成功率: 11.11%
+   总耗时: 28ms
+
+📋 详细测试结果:
+1. ❌ CharacterBaseInfo-Create
+   状态: FAIL
+   消息: 创建失败: Error: Unknown column 'name' in 'field list'
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 10ms
+
+2. ❌ CharacterAffinities-Setup
+   状态: FAIL
+   消息: 创建测试角色失败: Error: Unknown column 'name' in 'field list'
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 11ms
+
+3. ❌ RealmData-ReadAll
+   状态: FAIL
+   消息: 境界数据为空
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 2ms
+
+4. ❌ RealmData-Pagination
+   状态: FAIL
+   消息: 分页查询无数据
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 1ms
+
+5. ✅ RealmData-ConditionalQuery
+   状态: PASS
+   消息: 按大境界查询成功，找到0个练气期境界
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 1ms
+
+6. ❌ RealmData-Count
+   状态: FAIL
+   消息: 境界数据计数为0
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 0ms
+
+7. ❌ Transaction-Execute
+   状态: FAIL
+   消息: 事务执行失败: Error: This command is not supported in the prepared statement protocol yet
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 1ms
+
+8. ❌ Batch-Create
+   状态: FAIL
+   消息: 批量创建失败: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TRANSACTION' at line 1
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 1ms
+
+9. ❌ Batch-Update
+   状态: FAIL
+   消息: 批量更新失败: Error: Unknown column 'realmLevel' in 'where clause'
+   时间: 7/30/2025, 8:22:31 AM
+   耗时: 1ms
+
+⚠️  失败的测试:
+   - CharacterBaseInfo-Create: 创建失败: Error: Unknown column 'name' in 'field list'
+   - CharacterAffinities-Setup: 创建测试角色失败: Error: Unknown column 'name' in 'field list'
+   - RealmData-ReadAll: 境界数据为空
+   - RealmData-Pagination: 分页查询无数据
+   - RealmData-Count: 境界数据计数为0
+   - Transaction-Execute: 事务执行失败: Error: This command is not supported in the prepared statement protocol yet
+   - Batch-Create: 批量创建失败: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TRANSACTION' at line 1
+   - Batch-Update: 批量更新失败: Error: Unknown column 'realmLevel' in 'where clause'
+
+================================================================================
