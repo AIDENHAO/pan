@@ -269,6 +269,7 @@ const DatabaseManagementPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
+  const [selectedCharacterId, setSelectedCharacterId] = useState<string>('');
   
   // 数据状态
   const [stats, setStats] = useState<DatabaseStats | null>(null);
@@ -314,6 +315,49 @@ const DatabaseManagementPage: React.FC = () => {
     character_gender: '其他',
     zongMenJoinBool: false
   });
+
+  /**
+   * 加载选中角色的关联数据
+   */
+  const loadCharacterRelatedData = async (characterId: string, dataType: string) => {
+    if (!characterId) {
+      setError('请先选择一个角色');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    
+    try {
+      switch (dataType) {
+        case 'character-affinities':
+          await fetchCharacterAffinities(characterId);
+          break;
+        case 'character-strength':
+          await fetchCharacterStrength(characterId);
+          break;
+        case 'character-body-types':
+          await fetchCharacterBodyTypes(characterId);
+          break;
+        case 'character-skills':
+          await fetchCharacterSkills(characterId);
+          break;
+        case 'character-weapons':
+          await fetchCharacterWeapons(characterId);
+          break;
+        case 'character-currency':
+          await fetchCharacterCurrency(characterId);
+          break;
+        default:
+          setError('未知的数据类型');
+      }
+    } catch (error) {
+      console.error('加载角色关联数据失败:', error);
+      setError('加载数据失败');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   /**
    * API调用函数
@@ -381,7 +425,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchRealms = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<RealmData[]>('/api/database/realm-data');
+      const data = await apiCall<RealmData[]>('/api/database/realms');
       setRealms(data);
     } catch (err) {
       setError(`获取境界列表失败: ${err}`);
@@ -396,7 +440,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchSkills = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<SkillData[]>('/api/database/skill-data');
+      const data = await apiCall<SkillData[]>('/api/database/skills');
       setSkills(data);
     } catch (err) {
       setError(`获取技能列表失败: ${err}`);
@@ -411,7 +455,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchWeapons = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<WeaponData[]>('/api/database/weapon-data');
+      const data = await apiCall<WeaponData[]>('/api/database/weapons');
       setWeapons(data);
     } catch (err) {
       setError(`获取武器列表失败: ${err}`);
@@ -426,7 +470,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchItems = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<ItemData[]>('/api/database/item-data');
+      const data = await apiCall<ItemData[]>('/api/database/items');
       setItems(data);
     } catch (err) {
       setError(`获取物品列表失败: ${err}`);
@@ -441,7 +485,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchBodyTypes = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<BodyTypeData[]>('/api/database/body-type-data');
+      const data = await apiCall<BodyTypeData[]>('/api/database/body-types');
       setBodyTypes(data);
     } catch (err) {
       setError(`获取体质列表失败: ${err}`);
@@ -456,7 +500,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchZongmen = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<ZongmenData[]>('/api/database/zongmen-data');
+      const data = await apiCall<ZongmenData[]>('/api/database/zongmen');
       setZongmen(data);
     } catch (err) {
       setError(`获取宗门列表失败: ${err}`);
@@ -471,7 +515,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchAchievements = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<AchievementData[]>('/api/database/achievement-data');
+      const data = await apiCall<AchievementData[]>('/api/database/achievements');
       setAchievements(data);
     } catch (err) {
       setError(`获取成就列表失败: ${err}`);
@@ -486,7 +530,7 @@ const DatabaseManagementPage: React.FC = () => {
   const fetchItemCategories = async () => {
     try {
       setLoading(true);
-      const data = await apiCall<ItemTypeCategory[]>('/api/database/item-type-category');
+      const data = await apiCall<ItemTypeCategory[]>('/api/database/item-categories');
       setItemCategories(data);
     } catch (err) {
       setError(`获取物品分类列表失败: ${err}`);
@@ -496,90 +540,90 @@ const DatabaseManagementPage: React.FC = () => {
   };
 
   /**
-   * 获取角色亲和度列表
+   * 获取角色亲和度
    */
-  const fetchCharacterAffinities = async () => {
+  const fetchCharacterAffinities = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterAffinities[]>('/api/database/character-affinities');
-      setCharacterAffinities(data);
+      const data = await apiCall<CharacterAffinities>(`/api/database/character-affinities/${characterId}`);
+      setCharacterAffinities([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色亲和度列表失败: ${err}`);
+      setError(`获取角色亲和度失败: ${err}`);
     } finally {
       setLoading(false);
     }
   };
 
   /**
-   * 获取角色力量列表
+   * 获取角色力量
    */
-  const fetchCharacterStrength = async () => {
+  const fetchCharacterStrength = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterStrength[]>('/api/database/character-strength');
-      setCharacterStrength(data);
+      const data = await apiCall<CharacterStrength>(`/api/database/character-strength/${characterId}`);
+      setCharacterStrength([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色力量列表失败: ${err}`);
+      setError(`获取角色力量失败: ${err}`);
     } finally {
       setLoading(false);
     }
   };
 
   /**
-   * 获取角色体质列表
+   * 获取角色体质
    */
-  const fetchCharacterBodyTypes = async () => {
+  const fetchCharacterBodyTypes = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterBodyTypes[]>('/api/database/character-body-types');
-      setCharacterBodyTypes(data);
+      const data = await apiCall<CharacterBodyTypes>(`/api/database/character-body-types/${characterId}`);
+      setCharacterBodyTypes([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色体质列表失败: ${err}`);
+      setError(`获取角色体质失败: ${err}`);
     } finally {
       setLoading(false);
     }
   };
 
   /**
-   * 获取角色技能列表
+   * 获取角色技能
    */
-  const fetchCharacterSkills = async () => {
+  const fetchCharacterSkills = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterSkills[]>('/api/database/character-skills');
-      setCharacterSkills(data);
+      const data = await apiCall<CharacterSkills>(`/api/database/character-skills/${characterId}`);
+      setCharacterSkills([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色技能列表失败: ${err}`);
+      setError(`获取角色技能失败: ${err}`);
     } finally {
       setLoading(false);
     }
   };
 
   /**
-   * 获取角色武器列表
+   * 获取角色武器
    */
-  const fetchCharacterWeapons = async () => {
+  const fetchCharacterWeapons = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterWeapons[]>('/api/database/character-weapons');
-      setCharacterWeapons(data);
+      const data = await apiCall<CharacterWeapons>(`/api/database/character-weapons/${characterId}`);
+      setCharacterWeapons([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色武器列表失败: ${err}`);
+      setError(`获取角色武器失败: ${err}`);
     } finally {
       setLoading(false);
     }
   };
 
   /**
-   * 获取角色货币列表
+   * 获取角色货币
    */
-  const fetchCharacterCurrency = async () => {
+  const fetchCharacterCurrency = async (characterId: string) => {
     try {
       setLoading(true);
-      const data = await apiCall<CharacterCurrency[]>('/api/database/character-currency');
-      setCharacterCurrency(data);
+      const data = await apiCall<CharacterCurrency>(`/api/database/character-currency/${characterId}`);
+      setCharacterCurrency([data]); // 包装为数组以保持界面兼容性
     } catch (err) {
-      setError(`获取角色货币列表失败: ${err}`);
+      setError(`获取角色货币失败: ${err}`);
     } finally {
       setLoading(false);
     }
@@ -614,7 +658,7 @@ const DatabaseManagementPage: React.FC = () => {
       
       const characterData = {
         ...newCharacter,
-        id: characterId
+        character_uuid: characterId
       };
       
       await apiCall('/api/database/character-base-info', {
@@ -731,23 +775,14 @@ const DatabaseManagementPage: React.FC = () => {
       case 'characters':
         fetchCharacters();
         break;
+      // 角色关联数据需要特定角色ID，不在此处自动加载
       case 'character-affinities':
-        fetchCharacterAffinities();
-        break;
       case 'character-strength':
-        fetchCharacterStrength();
-        break;
       case 'character-body-types':
-        fetchCharacterBodyTypes();
-        break;
       case 'character-skills':
-        fetchCharacterSkills();
-        break;
       case 'character-weapons':
-        fetchCharacterWeapons();
-        break;
       case 'character-currency':
-        fetchCharacterCurrency();
+        // 这些数据需要选择特定角色后才能加载
         break;
       case 'character-items':
         fetchCharacterItems();
@@ -778,6 +813,22 @@ const DatabaseManagementPage: React.FC = () => {
         break;
     }
   }, [activeTab]);
+
+  /**
+   * 监听选中角色变化，自动加载角色关联数据
+   */
+  useEffect(() => {
+    if (selectedCharacterId && [
+      'character-affinities',
+      'character-strength', 
+      'character-body-types',
+      'character-skills',
+      'character-weapons',
+      'character-currency'
+    ].includes(activeTab)) {
+      loadCharacterRelatedData(selectedCharacterId, activeTab);
+    }
+  }, [selectedCharacterId, activeTab]);
 
   /**
    * 渲染统计信息
@@ -1007,7 +1058,10 @@ const DatabaseManagementPage: React.FC = () => {
           </thead>
           <tbody>
             {(searchResults.length > 0 ? searchResults : characters).map((character) => (
-              <tr key={character.character_uuid}>
+              <tr 
+                key={character.character_uuid}
+                className={selectedCharacterId === character.character_uuid ? 'selected' : ''}
+              >
                 <td>{character.character_uuid}</td>
                 <td>{character.character_name}</td>
                 <td>{character.character_dao_hao || '-'}</td>
@@ -1020,8 +1074,15 @@ const DatabaseManagementPage: React.FC = () => {
                 <td>{character.create_time ? new Date(character.create_time).toLocaleString() : '-'}</td>
                 <td>
                   <button 
+                    className={`btn btn-sm ${selectedCharacterId === character.character_uuid ? 'btn-success' : 'btn-primary'}`}
+                    onClick={() => setSelectedCharacterId(character.character_uuid)}
+                  >
+                    {selectedCharacterId === character.character_uuid ? '已选中' : '选择'}
+                  </button>
+                  <button 
                     className="btn btn-danger btn-sm" 
                     onClick={() => deleteCharacter(character.character_uuid)}
+                    style={{marginLeft: '5px'}}
                   >
                     删除
                   </button>
@@ -1050,22 +1111,16 @@ const DatabaseManagementPage: React.FC = () => {
             // 根据当前标签重新获取数据
             switch (activeTab) {
               case 'character-affinities':
-                fetchCharacterAffinities();
-                break;
               case 'character-strength':
-                fetchCharacterStrength();
-                break;
               case 'character-body-types':
-                fetchCharacterBodyTypes();
-                break;
               case 'character-skills':
-                fetchCharacterSkills();
-                break;
               case 'character-weapons':
-                fetchCharacterWeapons();
-                break;
               case 'character-currency':
-                fetchCharacterCurrency();
+                if (selectedCharacterId) {
+                  loadCharacterRelatedData(selectedCharacterId, activeTab);
+                } else {
+                  setError('请先选择一个角色来查看其关联数据');
+                }
                 break;
               case 'character-items':
                 fetchCharacterItems();
@@ -1143,7 +1198,7 @@ const DatabaseManagementPage: React.FC = () => {
         return renderCharacters();
       case 'character-affinities':
         return renderDataTable('角色亲和度数据', characterAffinities, [
-          {key: 'character_id', label: '角色ID'},
+          {key: 'character_uuid', label: '角色ID'},
           {key: 'total_affinity', label: '总亲和度'},
           {key: 'metal_affinity', label: '金属性'},
           {key: 'wood_affinity', label: '木属性'},
@@ -1153,7 +1208,7 @@ const DatabaseManagementPage: React.FC = () => {
         ]);
       case 'character-strength':
         return renderDataTable('角色力量数据', characterStrength, [
-          {key: 'character_id', label: '角色ID'},
+          {key: 'character_uuid', label: '角色ID'},
           {key: 'physical_strength', label: '体质强度'},
           {key: 'spiritual_strength', label: '灵力强度'},
           {key: 'soul_strength', label: '灵魂强度'},
@@ -1162,7 +1217,7 @@ const DatabaseManagementPage: React.FC = () => {
         ]);
       case 'character-body-types':
         return renderDataTable('角色体质数据', characterBodyTypes, [
-          {key: 'character_id', label: '角色ID'},
+          {key: 'character_uuid', label: '角色ID'},
           {key: 'body_type_1_id', label: '体质1'},
           {key: 'body_type_2_id', label: '体质2'},
           {key: 'body_type_3_id', label: '体质3'},
@@ -1171,25 +1226,25 @@ const DatabaseManagementPage: React.FC = () => {
         ]);
       case 'character-skills':
         return renderDataTable('角色技能数据', characterSkills, [
-          {key: 'character_id', label: '角色ID'},
-          {key: 'skill_1', label: '心法'},
-          {key: 'skill_2', label: '功法1'},
-          {key: 'skill_3', label: '功法2'},
-          {key: 'skill_4', label: '武技1'},
-          {key: 'skill_5', label: '武技2'}
+          {key: 'character_uuid', label: '角色ID'},
+          {key: 'skill_1_id', label: '技能1'},
+          {key: 'skill_2_id', label: '技能2'},
+          {key: 'skill_3_id', label: '技能3'},
+          {key: 'skill_4_id', label: '技能4'},
+          {key: 'skill_5_id', label: '技能5'}
         ]);
       case 'character-weapons':
         return renderDataTable('角色武器数据', characterWeapons, [
-          {key: 'character_id', label: '角色ID'},
-          {key: 'weapon_1', label: '武器1'},
-          {key: 'weapon_2', label: '武器2'},
-          {key: 'weapon_3', label: '武器3'},
-          {key: 'weapon_4', label: '武器4'},
-          {key: 'weapon_5', label: '武器5'}
+          {key: 'character_uuid', label: '角色ID'},
+          {key: 'weapon_1_id', label: '武器1'},
+          {key: 'weapon_2_id', label: '武器2'},
+          {key: 'weapon_3_id', label: '武器3'},
+          {key: 'weapon_4_id', label: '武器4'},
+          {key: 'weapon_5_id', label: '武器5'}
         ]);
       case 'character-currency':
         return renderDataTable('角色货币数据', characterCurrency, [
-          {key: 'character_id', label: '角色ID'},
+          {key: 'character_uuid', label: '角色ID'},
           {key: 'copper_coin', label: '铜币'},
           {key: 'silver_coin', label: '银币'},
           {key: 'gold_coin', label: '金币'},
