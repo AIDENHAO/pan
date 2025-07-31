@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { getDisciples } from '../services/leaderService';
+import { getDisciples } from '../../backend/services/leaderService';
 import '../styles/DisciplesPage.css';
 
 /**

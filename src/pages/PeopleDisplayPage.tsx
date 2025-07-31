@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { IPeopleData } from '../types/peopleData';
-import { PeopleDataService } from '../services/peopleDataService';
+import { PeopleDataService } from '../../backend/services/peopleDataService';
 import '../styles/PeopleDisplayPage.css';
 
 /**

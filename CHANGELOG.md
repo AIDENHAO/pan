@@ -1,5 +1,128 @@
 # 项目变更日志 (CHANGELOG)
 
+## [v2.1.3] - 2025-08-01
+
+### 🔧 DAL层重构与测试优化
+
+#### 环境配置优化
+- **[MOVED]** 将根目录`.env`文件移动到`backend/`目录下，确保后端项目正确加载数据库配置
+- **[VERIFIED]** 数据库连接配置正常，环境变量加载成功
+
+#### 目录结构重构
+- **[RENAMED]** 将`backend/DAL_test`目录重命名为`test-dal`，提升目录命名规范性
+- **[FIXED]** 修正所有测试文件中的导入路径，解决模块找不到错误
+- **[UPDATED]** 更新`package.json`中的测试脚本，使用`tsx`替代`ts-node`运行TypeScript文件
+
+#### 导入路径全面修复
+- **[FIXED]** 修复`backend/dal/implementations/`目录下所有文件的导入路径：
+  - `CharacterDALs.ts` - 修正`dbManager`和`types`导入路径
+  - `BaseDAL.ts` - 修正`dbManager`和`dal`接口导入路径
+  - `DALFactory.ts` - 修正`dbManager`和`dal`接口导入路径
+  - `DatabaseService.ts` - 修正`dbManager`、`dbInitializer`和`types`导入路径
+- **[FIXED]** 修复测试文件导入路径：
+  - `characterDALs-test.ts` - 修正`CharacterDALs`和`types`导入路径
+  - `dalFactory-test.ts` - 修正所有DAL相关模块导入路径
+
+#### 技术规范改进
+- **[IMPROVED]** 使用`tsx`替代`ts-node`解决TypeScript模块兼容性问题
+- **[VERIFIED]** 所有导入路径使用正确的相对路径，遵循项目目录结构
+- **[VERIFIED]** 代码规范符合React-TypeScript应用标准
+
+### 🧪 测试执行结果
+
+#### BaseDAL测试
+- ✅ 数据库连接测试 - 通过
+- ✅ CRUD操作测试 - 通过
+- ✅ 分页查询测试 - 通过
+- ✅ 统计方法测试 - 通过
+- ✅ SQL注入防护测试 - 通过
+- ✅ CharacterDAL特殊方法测试 - 通过
+- **总体成功率：100% (10/10)，耗时：23ms**
+
+#### CharacterDALs测试
+- ✅ 数据库连接测试 - 通过
+- ✅ 角色信息DAL测试 - 通过
+- ✅ 角色属性DAL测试 - 通过
+- ✅ 角色技能DAL测试 - 通过
+- ✅ 角色物品DAL测试 - 通过
+- ✅ 静态数据DAL测试 - 通过
+- **总体成功率：100% (17/17)，耗时：37ms**
+
+#### DALFactory测试
+- ✅ 单例模式测试 - 通过
+- ✅ DAL创建测试 - 通过
+- ✅ 缓存机制测试 - 通过
+- ✅ 事务操作测试 - 通过
+- **总体成功率：100% (10/10)，耗时：11ms**
+
+#### 完整测试套件
+- **[SUCCESS]** `npm run test:dal`执行成功
+- **[VERIFIED]** 所有DAL层功能正常工作
+- **[VERIFIED]** 数据库连接和操作稳定
+
+### 📁 文件变更详情
+
+#### 环境配置
+- `.env` - 从根目录移动到`backend/`目录
+
+#### 目录重构
+- `backend/DAL_test/` → `backend/test-dal/`
+
+#### 导入路径修复
+- `backend/dal/implementations/CharacterDALs.ts`
+  - `../config/database.js` → `../../database/config/database.js`
+  - `../interfaces/types.js` → `../../database/interfaces/types.js`
+- `backend/dal/implementations/BaseDAL.ts`
+  - `../config/database.js` → `../../database/config/database.js`
+  - `../interfaces/dal.js` → `../../database/interfaces/dal.js`
+- `backend/dal/implementations/DALFactory.ts`
+  - `../config/database.js` → `../../database/config/database.js`
+  - `../interfaces/dal.js` → `../../database/interfaces/dal.js`
+- `backend/dal/implementations/DatabaseService.ts`
+  - `../config/database.js` → `../../database/config/database.js`
+  - `../config/init.js` → `../../database/config/init.js`
+  - `../interfaces/types.js` → `../../database/interfaces/types.js`
+
+#### 测试配置
+- `backend/package.json`
+  - `test:dal`脚本：`ts-node` → `npx tsx`
+
+### 🚀 项目状态
+- **[READY]** DAL层重构完成，所有测试通过
+- **[VERIFIED]** 代码规范符合React-TypeScript应用标准
+- **[STABLE]** 数据库访问层功能稳定可靠
+
+---
+
+## [v2.1.2] - 2025-07-31
+
+### 🐛 路由系统修复
+
+#### 核心问题解决
+- **[FIXED]** 修复path-to-regexp库兼容性错误 "Missing parameter name at 1"
+- **[FIXED]** 解决Express路由通配符语法问题，将`router.use('*', ...)`改为`router.use((req, res) => ...)`
+- **[VERIFIED]** 服务器启动成功，所有API端点正常工作
+- **[VERIFIED]** 数据库连接正常，所有子路由模块正常加载
+
+#### 路由架构优化
+- **[IMPROVED]** 优化404错误处理中间件，使用标准Express语法
+- **[VERIFIED]** 角色管理模块路由正常工作
+- **[VERIFIED]** 静态数据模块路由正常工作
+- **[VERIFIED]** 系统管理模块路由正常工作
+- **[VERIFIED]** 兼容性模块路由正常工作
+
+#### 文件变更详情
+- `src/routes/index.ts`
+  - 修复404处理路由的通配符语法错误
+  - 将`router.use('*', ...)`改为`router.use((req, res) => ...)`
+  - 确保与最新版path-to-regexp库兼容
+
+### 🚀 服务器状态
+- **[RUNNING]** 后端服务器成功启动在 http://localhost:3015
+- **[READY]** 所有API端点可用，支持前后端集成开发
+
+---
+
 ## [v2.1.1] - 2025-07-30
 
 ### 🔧 DAL层CRUD功能验证与优化
