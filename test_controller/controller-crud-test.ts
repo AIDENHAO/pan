@@ -149,7 +149,7 @@ class ControllerCRUDTest {
         throw new Error('创建角色响应数据格式错误');
       }
       
-      createdCharacterId = data.data.character_id;
+      createdCharacterId = data.data.character_uuid;
       return `角色创建成功，ID：${createdCharacterId}`;
     });
     

@@ -235,6 +235,63 @@ export class DatabaseController extends BaseController {
     }
   }
 
+  /**
+   * 创建境界数据
+   * POST /api/database/realms
+   */
+  public async createRealmData(req: Request, res: Response): Promise<void> {
+    try {
+      const realmData = req.body;
+      this.validateRequiredParams(realmData, ['realm_level', 'stage_division', 'major_realm', 'minor_realm', 'stage']);
+      
+      const newRealm = await this.realmDAL.create(realmData);
+      this.sendSuccess(res, newRealm, '创建境界数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新境界数据
+   * PUT /api/database/realms/:id
+   */
+  public async updateRealmData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const realmData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedRealm = await this.realmDAL.update(parseInt(id), realmData);
+      if (!updatedRealm) {
+        throw new NotFoundError('境界数据');
+      }
+      
+      this.sendSuccess(res, updatedRealm, '更新境界数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除境界数据
+   * DELETE /api/database/realms/:id
+   */
+  public async deleteRealmData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.realmDAL.delete(parseInt(id));
+      if (!success) {
+        throw new NotFoundError('境界数据');
+      }
+      
+      this.sendSuccess(res, null, '删除境界数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
   // ==================== 技能管理 ====================
 
   /**
@@ -265,6 +322,63 @@ export class DatabaseController extends BaseController {
       }
       
       this.sendSuccess(res, skill, '获取技能信息成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 创建技能数据
+   * POST /api/database/skills
+   */
+  public async createSkillData(req: Request, res: Response): Promise<void> {
+    try {
+      const skillData = req.body;
+      this.validateRequiredParams(skillData, ['skill_id', 'skill_name']);
+      
+      const newSkill = await this.skillDAL.create(skillData);
+      this.sendSuccess(res, newSkill, '创建技能数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新技能数据
+   * PUT /api/database/skills/:id
+   */
+  public async updateSkillData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const skillData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedSkill = await this.skillDAL.update(id, skillData);
+      if (!updatedSkill) {
+        throw new NotFoundError('技能数据');
+      }
+      
+      this.sendSuccess(res, updatedSkill, '更新技能数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除技能数据
+   * DELETE /api/database/skills/:id
+   */
+  public async deleteSkillData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.skillDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('技能数据');
+      }
+      
+      this.sendSuccess(res, null, '删除技能数据成功');
     } catch (error) {
       this.handleError(res, error);
     }
@@ -305,6 +419,63 @@ export class DatabaseController extends BaseController {
     }
   }
 
+  /**
+   * 创建武器数据
+   * POST /api/database/weapons
+   */
+  public async createWeaponData(req: Request, res: Response): Promise<void> {
+    try {
+      const weaponData = req.body;
+      this.validateRequiredParams(weaponData, ['weapon_id', 'weapon_name']);
+      
+      const newWeapon = await this.weaponDAL.create(weaponData);
+      this.sendSuccess(res, newWeapon, '创建武器数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新武器数据
+   * PUT /api/database/weapons/:id
+   */
+  public async updateWeaponData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const weaponData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedWeapon = await this.weaponDAL.update(id, weaponData);
+      if (!updatedWeapon) {
+        throw new NotFoundError('武器数据');
+      }
+      
+      this.sendSuccess(res, updatedWeapon, '更新武器数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除武器数据
+   * DELETE /api/database/weapons/:id
+   */
+  public async deleteWeaponData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.weaponDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('武器数据');
+      }
+      
+      this.sendSuccess(res, null, '删除武器数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
   // ==================== 物品管理 ====================
 
   /**
@@ -335,6 +506,63 @@ export class DatabaseController extends BaseController {
       }
       
       this.sendSuccess(res, item, '获取物品信息成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 创建物品数据
+   * POST /api/database/items
+   */
+  public async createItemData(req: Request, res: Response): Promise<void> {
+    try {
+      const itemData = req.body;
+      this.validateRequiredParams(itemData, ['item_id', 'item_name']);
+      
+      const newItem = await this.itemDAL.create(itemData);
+      this.sendSuccess(res, newItem, '创建物品数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新物品数据
+   * PUT /api/database/items/:id
+   */
+  public async updateItemData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const itemData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedItem = await this.itemDAL.update(id, itemData);
+      if (!updatedItem) {
+        throw new NotFoundError('物品数据');
+      }
+      
+      this.sendSuccess(res, updatedItem, '更新物品数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除物品数据
+   * DELETE /api/database/items/:id
+   */
+  public async deleteItemData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.itemDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('物品数据');
+      }
+      
+      this.sendSuccess(res, null, '删除物品数据成功');
     } catch (error) {
       this.handleError(res, error);
     }
@@ -407,13 +635,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterAffinities(req: Request, res: Response): Promise<void> {
     try {
       const affinitiesData = req.body;
-      this.validateRequiredParams(affinitiesData, ['character_id']);
+      this.validateRequiredParams(affinitiesData, ['character_uuid']);
       
-      const existing = await this.characterAffinitiesDAL.findByCharacterId(affinitiesData.character_id);
+      const existing = await this.characterAffinitiesDAL.findByCharacterId(affinitiesData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterAffinitiesDAL.update(affinitiesData.character_id, affinitiesData);
+        result = await this.characterAffinitiesDAL.update(affinitiesData.character_uuid, affinitiesData);
       } else {
         result = await this.characterAffinitiesDAL.create(affinitiesData);
       }
@@ -453,13 +681,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterStrength(req: Request, res: Response): Promise<void> {
     try {
       const strengthData = req.body;
-      this.validateRequiredParams(strengthData, ['character_id']);
+      this.validateRequiredParams(strengthData, ['character_uuid']);
       
-      const existing = await this.characterStrengthDAL.findByCharacterId(strengthData.character_id);
+      const existing = await this.characterStrengthDAL.findByCharacterId(strengthData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterStrengthDAL.update(strengthData.character_id, strengthData);
+        result = await this.characterStrengthDAL.update(strengthData.character_uuid, strengthData);
       } else {
         result = await this.characterStrengthDAL.create(strengthData);
       }
@@ -499,13 +727,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterBodyTypes(req: Request, res: Response): Promise<void> {
     try {
       const bodyTypesData = req.body;
-      this.validateRequiredParams(bodyTypesData, ['character_id']);
+      this.validateRequiredParams(bodyTypesData, ['character_uuid']);
       
-      const existing = await this.characterBodyTypesDAL.findByCharacterId(bodyTypesData.character_id);
+      const existing = await this.characterBodyTypesDAL.findByCharacterId(bodyTypesData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterBodyTypesDAL.update(bodyTypesData.character_id, bodyTypesData);
+        result = await this.characterBodyTypesDAL.update(bodyTypesData.character_uuid, bodyTypesData);
       } else {
         result = await this.characterBodyTypesDAL.create(bodyTypesData);
       }
@@ -545,13 +773,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterSkills(req: Request, res: Response): Promise<void> {
     try {
       const skillsData = req.body;
-      this.validateRequiredParams(skillsData, ['character_id']);
+      this.validateRequiredParams(skillsData, ['character_uuid']);
       
-      const existing = await this.characterSkillsDAL.findByCharacterId(skillsData.character_id);
+      const existing = await this.characterSkillsDAL.findByCharacterId(skillsData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterSkillsDAL.update(skillsData.character_id, skillsData);
+        result = await this.characterSkillsDAL.update(skillsData.character_uuid, skillsData);
       } else {
         result = await this.characterSkillsDAL.create(skillsData);
       }
@@ -591,13 +819,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterWeapons(req: Request, res: Response): Promise<void> {
     try {
       const weaponsData = req.body;
-      this.validateRequiredParams(weaponsData, ['character_id']);
+      this.validateRequiredParams(weaponsData, ['character_uuid']);
       
-      const existing = await this.characterWeaponsDAL.findByCharacterId(weaponsData.character_id);
+      const existing = await this.characterWeaponsDAL.findByCharacterId(weaponsData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterWeaponsDAL.update(weaponsData.character_id, weaponsData);
+        result = await this.characterWeaponsDAL.update(weaponsData.character_uuid, weaponsData);
       } else {
         result = await this.characterWeaponsDAL.create(weaponsData);
       }
@@ -637,13 +865,13 @@ export class DatabaseController extends BaseController {
   public async createOrUpdateCharacterCurrency(req: Request, res: Response): Promise<void> {
     try {
       const currencyData = req.body;
-      this.validateRequiredParams(currencyData, ['character_id']);
+      this.validateRequiredParams(currencyData, ['character_uuid']);
       
-      const existing = await this.characterCurrencyDAL.findByCharacterId(currencyData.character_id);
+      const existing = await this.characterCurrencyDAL.findByCharacterId(currencyData.character_uuid);
       let result;
       
       if (existing) {
-        result = await this.characterCurrencyDAL.update(currencyData.character_id, currencyData);
+        result = await this.characterCurrencyDAL.update(currencyData.character_uuid, currencyData);
       } else {
         result = await this.characterCurrencyDAL.create(currencyData);
       }
@@ -777,6 +1005,63 @@ export class DatabaseController extends BaseController {
     }
   }
 
+  /**
+   * 创建体质数据
+   * POST /api/database/body-types
+   */
+  public async createBodyTypeData(req: Request, res: Response): Promise<void> {
+    try {
+      const bodyTypeData = req.body;
+      this.validateRequiredParams(bodyTypeData, ['body_type_id', 'body_type_name']);
+      
+      const newBodyType = await this.bodyTypeDAL.create(bodyTypeData);
+      this.sendSuccess(res, newBodyType, '创建体质数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新体质数据
+   * PUT /api/database/body-types/:id
+   */
+  public async updateBodyTypeData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const bodyTypeData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedBodyType = await this.bodyTypeDAL.update(id, bodyTypeData);
+      if (!updatedBodyType) {
+        throw new NotFoundError('体质数据');
+      }
+      
+      this.sendSuccess(res, updatedBodyType, '更新体质数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除体质数据
+   * DELETE /api/database/body-types/:id
+   */
+  public async deleteBodyTypeData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.bodyTypeDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('体质数据');
+      }
+      
+      this.sendSuccess(res, null, '删除体质数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
   // ==================== 宗门数据管理 ====================
 
   /**
@@ -807,6 +1092,63 @@ export class DatabaseController extends BaseController {
       }
       
       this.sendSuccess(res, zongmen, '获取宗门数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 创建宗门数据
+   * POST /api/database/zongmen
+   */
+  public async createZongmenData(req: Request, res: Response): Promise<void> {
+    try {
+      const zongmenData = req.body;
+      this.validateRequiredParams(zongmenData, ['zongmen_id', 'zongmen_name']);
+      
+      const newZongmen = await this.zongmenDAL.create(zongmenData);
+      this.sendSuccess(res, newZongmen, '创建宗门数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新宗门数据
+   * PUT /api/database/zongmen/:id
+   */
+  public async updateZongmenData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const zongmenData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedZongmen = await this.zongmenDAL.update(id, zongmenData);
+      if (!updatedZongmen) {
+        throw new NotFoundError('宗门数据');
+      }
+      
+      this.sendSuccess(res, updatedZongmen, '更新宗门数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除宗门数据
+   * DELETE /api/database/zongmen/:id
+   */
+  public async deleteZongmenData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.zongmenDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('宗门数据');
+      }
+      
+      this.sendSuccess(res, null, '删除宗门数据成功');
     } catch (error) {
       this.handleError(res, error);
     }
@@ -847,6 +1189,63 @@ export class DatabaseController extends BaseController {
     }
   }
 
+  /**
+   * 创建成就数据
+   * POST /api/database/achievements
+   */
+  public async createAchievementData(req: Request, res: Response): Promise<void> {
+    try {
+      const achievementData = req.body;
+      this.validateRequiredParams(achievementData, ['achievement_id', 'achievement_name']);
+      
+      const newAchievement = await this.achievementDAL.create(achievementData);
+      this.sendSuccess(res, newAchievement, '创建成就数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新成就数据
+   * PUT /api/database/achievements/:id
+   */
+  public async updateAchievementData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const achievementData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedAchievement = await this.achievementDAL.update(id, achievementData);
+      if (!updatedAchievement) {
+        throw new NotFoundError('成就数据');
+      }
+      
+      this.sendSuccess(res, updatedAchievement, '更新成就数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除成就数据
+   * DELETE /api/database/achievements/:id
+   */
+  public async deleteAchievementData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.achievementDAL.delete(id);
+      if (!success) {
+        throw new NotFoundError('成就数据');
+      }
+      
+      this.sendSuccess(res, null, '删除成就数据成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
   // ==================== 物品类型分类管理 ====================
 
   /**
@@ -877,6 +1276,63 @@ export class DatabaseController extends BaseController {
       }
       
       this.sendSuccess(res, category, '获取物品类型分类成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 创建物品类型分类
+   * POST /api/database/item-categories
+   */
+  public async createItemCategoryData(req: Request, res: Response): Promise<void> {
+    try {
+      const categoryData = req.body;
+      this.validateRequiredParams(categoryData, ['category_name']);
+      
+      const newCategory = await this.itemTypeCategoryDAL.create(categoryData);
+      this.sendSuccess(res, newCategory, '创建物品类型分类成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 更新物品类型分类
+   * PUT /api/database/item-categories/:id
+   */
+  public async updateItemCategoryData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const categoryData = req.body;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const updatedCategory = await this.itemTypeCategoryDAL.update(parseInt(id), categoryData);
+      if (!updatedCategory) {
+        throw new NotFoundError('物品类型分类');
+      }
+      
+      this.sendSuccess(res, updatedCategory, '更新物品类型分类成功');
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  /**
+   * 删除物品类型分类
+   * DELETE /api/database/item-categories/:id
+   */
+  public async deleteItemCategoryData(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      this.validateRequiredParams({ id }, ['id']);
+      
+      const success = await this.itemTypeCategoryDAL.delete(parseInt(id));
+      if (!success) {
+        throw new NotFoundError('物品类型分类');
+      }
+      
+      this.sendSuccess(res, null, '删除物品类型分类成功');
     } catch (error) {
       this.handleError(res, error);
     }

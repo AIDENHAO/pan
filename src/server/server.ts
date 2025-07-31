@@ -48,8 +48,27 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+
+
+// 调试：检查routes对象
+console.log('🔍 Routes对象类型:', typeof routes);
+console.log('🔍 Routes对象:', routes);
+if (routes && typeof routes.stack !== 'undefined') {
+  console.log('🔍 Routes堆栈长度:', routes.stack.length);
+} else {
+  console.log('❌ Routes对象无效或不是Express Router');
+}
+
 // 使用路由
 app.use('/', routes);
+
+// 直接测试路由（在routes之后）
+app.post('/direct-test', (req, res) => {
+  console.log('🎯 直接测试路由被调用');
+  res.json({ message: '直接测试路由工作正常' });
+});
+
+// 直接路由定义已移除，所有API路由通过routes模块处理
 
 // 调试：测试数据库路由是否正确导入
 if (process.env.NODE_ENV === 'development') {

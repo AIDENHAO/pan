@@ -34,7 +34,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
+    "@types/axios": "^0.14.4",
     "antd": "^5.26.6",
+    "axios": "^1.11.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

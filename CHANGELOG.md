@@ -1,5 +1,104 @@
 # 项目变更日志 (CHANGELOG)
 
+## [v2.1.0] - 2025-07-30
+
+### 🚀 新功能
+
+#### 静态数据CRUD API实现
+- **[NEW]** 为静态数据添加完整的CRUD API支持
+- **[NEW]** 实现境界、技能、武器、物品数据的增删改查接口
+- **[NEW]** 实现体质、宗门、成就、物品分类数据的增删改查接口
+- **[IMPROVED]** 扩展StaticDataDAL类，继承BaseDAL获得完整CRUD功能
+- **[NEW]** 添加前端CRUD操作按钮和样式
+- **[NEW]** 前端静态数据CRUD操作完全指向正确的API端点
+
+### 📋 API端点新增
+
+#### 境界数据管理
+- `POST /api/database/realms` - 创建境界数据
+- `PUT /api/database/realms/:id` - 更新境界数据
+- `DELETE /api/database/realms/:id` - 删除境界数据
+
+#### 技能数据管理
+- `POST /api/database/skills` - 创建技能数据
+- `PUT /api/database/skills/:id` - 更新技能数据
+- `DELETE /api/database/skills/:id` - 删除技能数据
+
+#### 武器数据管理
+- `POST /api/database/weapons` - 创建武器数据
+- `PUT /api/database/weapons/:id` - 更新武器数据
+- `DELETE /api/database/weapons/:id` - 删除武器数据
+
+#### 物品数据管理
+- `POST /api/database/items` - 创建物品数据
+- `PUT /api/database/items/:id` - 更新物品数据
+- `DELETE /api/database/items/:id` - 删除物品数据
+
+#### 体质数据管理
+- `POST /api/database/body-types` - 创建体质数据
+- `PUT /api/database/body-types/:id` - 更新体质数据
+- `DELETE /api/database/body-types/:id` - 删除体质数据
+
+#### 宗门数据管理
+- `POST /api/database/zongmen` - 创建宗门数据
+- `PUT /api/database/zongmen/:id` - 更新宗门数据
+- `DELETE /api/database/zongmen/:id` - 删除宗门数据
+
+#### 成就数据管理
+- `POST /api/database/achievements` - 创建成就数据
+- `PUT /api/database/achievements/:id` - 更新成就数据
+- `DELETE /api/database/achievements/:id` - 删除成就数据
+
+#### 物品分类管理
+- `POST /api/database/item-categories` - 创建物品分类
+- `PUT /api/database/item-categories/:id` - 更新物品分类
+- `DELETE /api/database/item-categories/:id` - 删除物品分类
+
+### 📁 文件变更详情
+
+#### 修改文件
+- `src/database/implementations/BaseDAL.ts`
+  - 修改StaticDataDAL类继承BaseDAL
+  - 移除重复的查询方法实现
+  - 添加完整CRUD功能支持
+
+- `src/controllers/DatabaseController.ts`
+  - 添加静态数据CRUD控制器方法
+  - 新增体质、宗门、成就、物品分类的完整CRUD方法
+  - 包含参数验证和错误处理
+  - 实现createRealmData、updateRealmData、deleteRealmData等方法
+  - 添加完整的错误处理和HTTP状态码
+
+- `src/routes/databaseRoutes.ts`
+  - 添加静态数据CRUD路由配置
+  - 支持POST/PUT/DELETE操作
+  - 新增体质、宗门、成就、物品分类的完整路由
+  - 支持RESTful API设计规范
+  - 统一路由命名和参数格式
+
+- `src/pages/DatabaseManagementPage.tsx`
+  - 实现前端CRUD操作界面
+  - 添加编辑、删除、新增功能按钮
+  - 完善handleEdit和handleAdd函数实现
+  - 支持所有静态数据类型的CRUD操作
+  - 添加CRUD操作按钮（新增、编辑、删除）
+  - 实现删除功能的API调用和确认对话框
+  - 添加数据刷新和错误处理机制
+
+- `src/styles/DatabaseManagementPage.css`
+  - 添加CRUD按钮样式定义
+  - 实现响应式设计和悬停效果
+  - 支持高对比度模式
+
+### 🔧 技术特点
+- **类型安全**：完整的TypeScript类型定义
+- **错误处理**：统一的错误处理和HTTP状态码
+- **RESTful设计**：遵循REST API设计规范
+- **用户体验**：友好的确认对话框和操作反馈
+- **可扩展性**：为新增和编辑功能预留接口
+
+---
+
 ## [v2.0.0] - 2025-07-30
 
 ### 🚀 重大更新

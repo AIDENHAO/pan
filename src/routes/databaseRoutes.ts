@@ -60,6 +60,24 @@ router.get('/realms', databaseController.getAllRealms.bind(databaseController));
  */
 router.get('/realms/:id', databaseController.getRealmById.bind(databaseController));
 
+/**
+ * 创建境界
+ * POST /api/database/realms
+ */
+router.post('/realms', databaseController.createRealmData.bind(databaseController));
+
+/**
+ * 更新境界
+ * PUT /api/database/realms/:id
+ */
+router.put('/realms/:id', databaseController.updateRealmData.bind(databaseController));
+
+/**
+ * 删除境界
+ * DELETE /api/database/realms/:id
+ */
+router.delete('/realms/:id', databaseController.deleteRealmData.bind(databaseController));
+
 // ==================== 技能管理 ====================
 /**
  * 获取所有技能
@@ -72,6 +90,24 @@ router.get('/skills', databaseController.getAllSkills.bind(databaseController));
  * GET /api/database/skills/:id
  */
 router.get('/skills/:id', databaseController.getSkillById.bind(databaseController));
+
+/**
+ * 创建技能
+ * POST /api/database/skills
+ */
+router.post('/skills', databaseController.createSkillData.bind(databaseController));
+
+/**
+ * 更新技能
+ * PUT /api/database/skills/:id
+ */
+router.put('/skills/:id', databaseController.updateSkillData.bind(databaseController));
+
+/**
+ * 删除技能
+ * DELETE /api/database/skills/:id
+ */
+router.delete('/skills/:id', databaseController.deleteSkillData.bind(databaseController));
 
 // ==================== 武器管理 ====================
 /**
@@ -86,6 +122,24 @@ router.get('/weapons', databaseController.getAllWeapons.bind(databaseController)
  */
 router.get('/weapons/:id', databaseController.getWeaponById.bind(databaseController));
 
+/**
+ * 创建武器
+ * POST /api/database/weapons
+ */
+router.post('/weapons', databaseController.createWeaponData.bind(databaseController));
+
+/**
+ * 更新武器
+ * PUT /api/database/weapons/:id
+ */
+router.put('/weapons/:id', databaseController.updateWeaponData.bind(databaseController));
+
+/**
+ * 删除武器
+ * DELETE /api/database/weapons/:id
+ */
+router.delete('/weapons/:id', databaseController.deleteWeaponData.bind(databaseController));
+
 // ==================== 物品管理 ====================
 /**
  * 获取所有物品
@@ -98,6 +152,24 @@ router.get('/items', databaseController.getAllItems.bind(databaseController));
  * GET /api/database/items/:id
  */
 router.get('/items/:id', databaseController.getItemById.bind(databaseController));
+
+/**
+ * 创建物品
+ * POST /api/database/items
+ */
+router.post('/items', databaseController.createItemData.bind(databaseController));
+
+/**
+ * 更新物品
+ * PUT /api/database/items/:id
+ */
+router.put('/items/:id', databaseController.updateItemData.bind(databaseController));
+
+/**
+ * 删除物品
+ * DELETE /api/database/items/:id
+ */
+router.delete('/items/:id', databaseController.deleteItemData.bind(databaseController));
 
 // ==================== 角色亲和度管理 ====================
 /**
@@ -221,6 +293,24 @@ router.get('/body-types', databaseController.getAllBodyTypes.bind(databaseContro
  */
 router.get('/body-types/:id', databaseController.getBodyTypeById.bind(databaseController));
 
+/**
+ * 创建体质数据
+ * POST /api/database/body-types
+ */
+router.post('/body-types', databaseController.createBodyTypeData.bind(databaseController));
+
+/**
+ * 更新体质数据
+ * PUT /api/database/body-types/:id
+ */
+router.put('/body-types/:id', databaseController.updateBodyTypeData.bind(databaseController));
+
+/**
+ * 删除体质数据
+ * DELETE /api/database/body-types/:id
+ */
+router.delete('/body-types/:id', databaseController.deleteBodyTypeData.bind(databaseController));
+
 // ==================== 宗门数据管理 ====================
 /**
  * 获取所有宗门数据
@@ -233,6 +323,24 @@ router.get('/zongmen', databaseController.getAllZongmen.bind(databaseController)
  * GET /api/database/zongmen/:id
  */
 router.get('/zongmen/:id', databaseController.getZongmenById.bind(databaseController));
+
+/**
+ * 创建宗门数据
+ * POST /api/database/zongmen
+ */
+router.post('/zongmen', databaseController.createZongmenData.bind(databaseController));
+
+/**
+ * 更新宗门数据
+ * PUT /api/database/zongmen/:id
+ */
+router.put('/zongmen/:id', databaseController.updateZongmenData.bind(databaseController));
+
+/**
+ * 删除宗门数据
+ * DELETE /api/database/zongmen/:id
+ */
+router.delete('/zongmen/:id', databaseController.deleteZongmenData.bind(databaseController));
 
 // ==================== 成就数据管理 ====================
 /**
@@ -247,6 +355,24 @@ router.get('/achievements', databaseController.getAllAchievements.bind(databaseC
  */
 router.get('/achievements/:id', databaseController.getAchievementById.bind(databaseController));
 
+/**
+ * 创建成就数据
+ * POST /api/database/achievements
+ */
+router.post('/achievements', databaseController.createAchievementData.bind(databaseController));
+
+/**
+ * 更新成就数据
+ * PUT /api/database/achievements/:id
+ */
+router.put('/achievements/:id', databaseController.updateAchievementData.bind(databaseController));
+
+/**
+ * 删除成就数据
+ * DELETE /api/database/achievements/:id
+ */
+router.delete('/achievements/:id', databaseController.deleteAchievementData.bind(databaseController));
+
 // ==================== 物品类型分类管理 ====================
 /**
  * 获取所有物品类型分类
@@ -259,6 +385,24 @@ router.get('/item-categories', databaseController.getAllItemCategories.bind(data
  * GET /api/database/item-categories/:id
  */
 router.get('/item-categories/:id', databaseController.getItemCategoryById.bind(databaseController));
+
+/**
+ * 创建物品类型分类
+ * POST /api/database/item-categories
+ */
+router.post('/item-categories', databaseController.createItemCategoryData.bind(databaseController));
+
+/**
+ * 更新物品类型分类
+ * PUT /api/database/item-categories/:id
+ */
+router.put('/item-categories/:id', databaseController.updateItemCategoryData.bind(databaseController));
+
+/**
+ * 删除物品类型分类
+ * DELETE /api/database/item-categories/:id
+ */
+router.delete('/item-categories/:id', databaseController.deleteItemCategoryData.bind(databaseController));
 
 // ==================== 角色基础信息管理 (兼容前端接口) ====================
 /**

@@ -63,6 +63,16 @@ router.post('/api/zongmen/resources/update', (req, res) => zongmenController.upd
 // 获取宗门信息 (兼容旧接口)
 router.post('/api/get-zongmen-info', (req, res) => zongmenController.getZongmenInfo(req, res));
 
+// ==================== 测试路由 ====================
+
+// 简单测试路由
+router.post('/test-route', (req, res) => {
+  console.log('🎯 测试路由被调用');
+  res.json({ message: '测试路由工作正常' });
+});
+
+// 注意：/api/database/realms 路由已在 databaseRoutes 中定义，这里不再重复定义
+
 // ==================== 映射数据相关路由 ====================
 
 // 获取所有映射数据 (新接口)
@@ -97,7 +107,10 @@ router.post('/api/get-mappings', (req, res) => mappingController.getAllMappings(
 // ==================== 数据库管理路由 ====================
 
 // 数据库管理路由
-router.use('/api/database', databaseRoutes);
+router.use('/api/database', (req, res, next) => {
+  console.log('🔍 数据库路由中间件被调用:', req.method, req.url);
+  next();
+}, databaseRoutes);
 
 // ==================== 健康检查路由 ====================
 
