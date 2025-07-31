@@ -1,0 +1,59 @@
+{
+  "characterTests": {
+    "testCharacter": {
+      "name": "DAL测试角色",
+      "gender": "男",
+      "realm_level": 1,
+      "cultivation_value": 0,
+      "spiritual_root": "金",
+      "life_state": "存活",
+      "location": "测试地点",
+      "description": "DAL层测试创建的角色"
+    },
+    "updateData": {
+      "cultivation_value": 100,
+      "description": "DAL层测试更新的角色"
+    },
+    "affinityData": {
+      "metal_affinity": 80,
+      "wood_affinity": 60,
+      "water_affinity": 70,
+      "fire_affinity": 50,
+      "earth_affinity": 65
+    }
+  },
+  "staticDataTests": {
+    "queryTests": {
+      "realms": true,
+      "skills": true,
+      "items": true,
+      "pagination": true
+    },
+    "expectedCounts": {
+      "minRealms": 1,
+      "minSkills": 1,
+      "minItems": 1
+    }
+  },
+  "transactionTests": {
+    "rollbackTest": {
+      "name": "DAL事务测试角色",
+      "gender": "女",
+      "realm_level": 1,
+      "cultivation_value": 0,
+      "spiritual_root": "木",
+      "life_state": "存活",
+      "location": "事务测试地点"
+    }
+  },
+  "errorHandlingTests": {
+    "nonExistentId": "non-existent-id-12345",
+    "invalidId": "",
+    "malformedId": "invalid-uuid-format"
+  },
+  "performanceTests": {
+    "batchSize": 10,
+    "timeoutMs": 5000,
+    "concurrentQueries": 5
+  }
+}

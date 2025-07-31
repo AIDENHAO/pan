@@ -1,0 +1,141 @@
+{
+  "testCases": {
+    "basic_functionality": {
+      "description": "基础功能测试",
+      "expected": "success",
+      "actual": "success",
+      "delay": 100,
+      "metadata": {
+        "priority": "high",
+        "category": "functional",
+        "tags": ["basic", "core"]
+      }
+    },
+    "error_handling": {
+      "description": "错误处理测试",
+      "shouldFail": false,
+      "delay": 50,
+      "errorType": "validation",
+      "metadata": {
+        "priority": "medium",
+        "category": "error",
+        "tags": ["error", "validation"]
+      }
+    },
+    "performance_test": {
+      "description": "性能测试",
+      "expected": "fast",
+      "actual": "fast",
+      "delay": 200,
+      "performanceThreshold": 300,
+      "metadata": {
+        "priority": "high",
+        "category": "performance",
+        "tags": ["performance", "speed"]
+      }
+    },
+    "boundary_test": {
+      "description": "边界值测试",
+      "inputValue": 100,
+      "minValue": 0,
+      "maxValue": 100,
+      "expected": "valid",
+      "actual": "valid",
+      "metadata": {
+        "priority": "medium",
+        "category": "boundary",
+        "tags": ["boundary", "validation"]
+      }
+    }
+  },
+  "config": {
+    "timeout": 5000,
+    "retries": 3,
+    "environment": "test",
+    "database": {
+      "host": "localhost",
+      "port": 3306,
+      "name": "test_db",
+      "resetAfterTest": true
+    },
+    "api": {
+      "baseUrl": "http://localhost:3000",
+      "timeout": 3000,
+      "retries": 2
+    },
+    "logging": {
+      "level": "debug",
+      "outputFile": "test.log",
+      "enableConsole": true
+    }
+  },
+  "testData": {
+    "users": [
+      {
+        "id": "test_user_1",
+        "name": "测试用户1",
+        "email": "test1@example.com",
+        "role": "user",
+        "active": true
+      },
+      {
+        "id": "test_user_2",
+        "name": "测试用户2",
+        "email": "test2@example.com",
+        "role": "admin",
+        "active": false
+      }
+    ],
+    "products": [
+      {
+        "id": "prod_001",
+        "name": "测试产品1",
+        "price": 99.99,
+        "category": "electronics",
+        "inStock": true
+      },
+      {
+        "id": "prod_002",
+        "name": "测试产品2",
+        "price": 149.99,
+        "category": "books",
+        "inStock": false
+      }
+    ]
+  },
+  "expectedResults": {
+    "basic_functionality": {
+      "status": "success",
+      "responseTime": "< 200ms",
+      "errorCount": 0
+    },
+    "error_handling": {
+      "status": "handled",
+      "errorType": "validation",
+      "errorMessage": "输入验证失败"
+    },
+    "performance_test": {
+      "status": "pass",
+      "responseTime": "< 300ms",
+      "throughput": "> 100 req/s"
+    },
+    "boundary_test": {
+      "status": "valid",
+      "withinBounds": true,
+      "validationPassed": true
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "createdBy": "测试团队",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "lastModified": "2024-01-01T00:00:00.000Z",
+    "description": "示例测试数据，用于演示标准测试数据格式",
+    "tags": ["example", "template", "standard"],
+    "compatibility": {
+      "minNodeVersion": "16.0.0",
+      "testFramework": "custom",
+      "databaseVersion": "8.0+"
+    }
+  }
+}

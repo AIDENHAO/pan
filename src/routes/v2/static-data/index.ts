@@ -3,6 +3,26 @@
  * 管理所有基础数据表，如境界、技能、武器、物品、宗门等
  */
 import { Router } from 'express';
+import { DatabaseController } from '../../../controllers/DatabaseController.js';
+import {
+  validateRealmId,
+  validateCreateRealmData,
+  validateUpdateRealmData,
+  validateRealmLevelRangeQuery,
+  validateSkillId,
+  validateCreateSkillData,
+  validateSkillTypeQuery,
+  validateWeaponId,
+  validateCreateWeaponData,
+  validateWeaponTypeQuery,
+  validateItemId,
+  validateCreateItemData,
+  validateItemTypeQuery,
+  validateZongmenId,
+  validateCreateZongmenData,
+  validateZongmenTypeQuery,
+  validateStaticDataPaginationQuery
+} from '../../../middleware/validation/static-data.js';
 import realmsRoutes from './realms.js';
 import skillsRoutes from './skills.js';
 import weaponsRoutes from './weapons.js';

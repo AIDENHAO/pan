@@ -1,164 +1,68 @@
 /**
- * API路由配置
- * 将控制器方法绑定到具体的API路由
+ * 新版本路由架构 - 主入口
+ * 模块化、结构清晰、符合数据库表结构的路由系统
  */
 import { Router } from 'express';
-import { LeaderController } from '../controllers/LeaderController.js';
-import { ZongmenController } from '../controllers/ZongmenController.js';
-import { MappingController } from '../controllers/MappingController.js';
-import databaseRoutes from './databaseRoutes.js';
+import characterRoutes from './v2/character/index.js';
+import staticDataRoutes from './v2/static-data/index.js';
+import systemRoutes from './v2/system/index.js';
+import legacyRoutes from './v2/legacy/index.js';
 
-// 创建路由实例
+// 创建主路由实例
 const router = Router();
 
-// 创建控制器实例
-const leaderController = new LeaderController();
-const zongmenController = new ZongmenController();
-const mappingController = new MappingController();
-
-// ==================== 掌门相关路由 ====================
-
-// 获取掌门信息 (新接口)
-router.get('/api/leader/info', (req, res) => leaderController.getLeaderInfo(req, res));
-
-// 更新修炼值 (新接口)
-router.post('/api/leader/cultivation/update', (req, res) => leaderController.updateCultivationValue(req, res));
-
-// 更新境界等级 (新接口)
-router.post('/api/leader/realm/update', (req, res) => leaderController.updateRealmLevel(req, res));
-
-// 激活境界突破 (新接口)
-router.post('/api/leader/breakthrough/activate', (req, res) => leaderController.activateBreakthrough(req, res));
-
-// ==================== 兼容旧接口 ====================
-
-// 获取掌门信息 (兼容旧接口)
-router.post('/api/get-person-info', (req, res) => leaderController.getLeaderInfo(req, res));
-
-// 更新修炼值 (兼容旧接口)
-router.post('/api/update-cultivation', (req, res) => leaderController.updateCultivationValue(req, res));
-
-// 更新境界等级 (兼容旧接口)
-router.post('/api/update-realm-level', (req, res) => leaderController.updateRealmLevel(req, res));
-
-// 激活境界突破 (兼容旧接口)
-router.post('/api/activate-breakthrough', (req, res) => leaderController.activateBreakthrough(req, res));
-
-// ==================== 宗门相关路由 ====================
-
-// 获取宗门信息 (新接口)
-router.get('/api/zongmen/info', (req, res) => zongmenController.getZongmenInfo(req, res));
-
-// 更新宗门等级
-router.post('/api/zongmen/level/update', (req, res) => zongmenController.updateZongmenLevel(req, res));
-
-// 更新宗门声望
-router.post('/api/zongmen/reputation/update', (req, res) => zongmenController.updateZongmenReputation(req, res));
-
-// 更新宗门资源
-router.post('/api/zongmen/resources/update', (req, res) => zongmenController.updateZongmenResources(req, res));
-
-// ==================== 兼容旧宗门接口 ====================
-
-// 获取宗门信息 (兼容旧接口)
-router.post('/api/get-zongmen-info', (req, res) => zongmenController.getZongmenInfo(req, res));
-
-// ==================== 测试路由 ====================
-
-// 简单测试路由
-router.post('/test-route', (req, res) => {
-  console.log('🎯 测试路由被调用');
-  res.json({ message: '测试路由工作正常' });
-});
-
-// 注意：/api/database/realms 路由已在 databaseRoutes 中定义，这里不再重复定义
-
-// ==================== 映射数据相关路由 ====================
-
-// 获取所有映射数据 (新接口)
-router.get('/api/mappings/all', (req, res) => mappingController.getAllMappings(req, res));
-
-// 获取职位映射数据
-router.get('/api/mappings/position', (req, res) => mappingController.getPositionMapping(req, res));
-
-// 获取境界映射数据
-router.get('/api/mappings/realm', (req, res) => mappingController.getRealmMapping(req, res));
-
-// 获取技能映射数据
-router.get('/api/mappings/skill', (req, res) => mappingController.getSkillMapping(req, res));
-
-// 获取建筑映射数据
-router.get('/api/mappings/building', (req, res) => mappingController.getBuildingMapping(req, res));
-
-// 根据类型获取特定映射数据
-router.get('/api/mappings/:type', (req, res) => mappingController.getMappingByType(req, res));
-
-// 根据映射类型和键获取特定值
-router.get('/api/mappings/:type/:key', (req, res) => mappingController.getMappingValue(req, res));
-
-// 批量获取映射值
-router.post('/api/mappings/batch', (req, res) => mappingController.getBatchMappingValues(req, res));
-
-// ==================== 兼容旧映射接口 ====================
-
-// 获取映射数据 (兼容旧接口)
-router.post('/api/get-mappings', (req, res) => mappingController.getAllMappings(req, res));
-
-// ==================== 数据库管理路由 ====================
-
-// 数据库管理路由
-router.use('/api/database', (req, res, next) => {
-  console.log('🔍 数据库路由中间件被调用:', req.method, req.url);
-  next();
-}, databaseRoutes);
-
-// ==================== 健康检查路由 ====================
-
-// API健康检查
-router.get('/api/health', (req, res) => {
+// ==================== API版本信息 ====================
+router.get('/api/v2', (req, res) => {
   res.json({
     success: true,
-    message: 'API服务运行正常',
+    message: '修仙应用 API v2.0',
+    version: '2.0.0',
     timestamp: new Date().toISOString(),
-    version: '1.0.0'
-  });
-});
-
-// 根路径重定向
-router.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: '欢迎使用修仙应用API',
+    modules: {
+      character: '角色管理模块',
+      staticData: '静态数据模块',
+      system: '系统管理模块',
+      legacy: '兼容性模块'
+    },
     endpoints: {
-      leader: {
-        info: 'GET /api/leader/info',
-        updateCultivation: 'POST /api/leader/cultivation/update',
-        updateRealm: 'POST /api/leader/realm/update',
-        breakthrough: 'POST /api/leader/breakthrough/activate'
-      },
-      zongmen: {
-        info: 'GET /api/zongmen/info',
-        updateLevel: 'POST /api/zongmen/level/update',
-        updateReputation: 'POST /api/zongmen/reputation/update',
-        updateResources: 'POST /api/zongmen/resources/update'
-      },
-      mappings: {
-        all: 'GET /api/mappings/all',
-        byType: 'GET /api/mappings/:type',
-        byKey: 'GET /api/mappings/:type/:key',
-        batch: 'POST /api/mappings/batch'
-      },
-      legacy: {
-        personInfo: 'POST /api/get-person-info',
-        zongmenInfo: 'POST /api/get-zongmen-info',
-        mappings: 'POST /api/get-mappings',
-        updateCultivation: 'POST /api/update-cultivation',
-        updateRealmLevel: 'POST /api/update-realm-level'
-      }
+      character: '/api/v2/character/*',
+      staticData: '/api/v2/static-data/*',
+      system: '/api/v2/system/*',
+      legacy: '/api/v2/legacy/*'
     }
   });
 });
 
-// 404处理将在server.ts中统一处理
+// ==================== 模块路由挂载 ====================
+
+// 角色管理模块 - 所有与角色相关的操作
+router.use('/api/v2/character', characterRoutes);
+
+// 静态数据模块 - 境界、技能、武器、物品等基础数据
+router.use('/api/v2/static-data', staticDataRoutes);
+
+// 系统管理模块 - 健康检查、统计信息等
+router.use('/api/v2/system', systemRoutes);
+
+// 兼容性模块 - 保持与旧版API的兼容
+router.use('/api/v2/legacy', legacyRoutes);
+
+// ==================== 全局中间件 ====================
+
+// 请求日志中间件
+router.use((req, res, next) => {
+  console.log(`🔍 [${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// 404处理
+router.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: '接口不存在',
+    path: req.originalUrl,
+    timestamp: new Date().toISOString()
+  });
+});
 
 export default router;

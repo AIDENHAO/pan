@@ -1,0 +1,89 @@
+{
+  "characterTests": {
+    "testCharacter": {
+      "name": "控制器测试角色",
+      "gender": "男",
+      "realm_level": 1,
+      "cultivation_value": 0,
+      "spiritual_root": "金",
+      "life_state": "存活",
+      "location": "控制器测试地点",
+      "description": "控制器层测试创建的角色"
+    },
+    "updateData": {
+      "cultivation_value": 100,
+      "description": "控制器层测试更新的角色"
+    },
+    "invalidData": {
+      "gender": "男"
+    },
+    "queryParams": {
+      "page": 1,
+      "limit": 10
+    }
+  },
+  "staticDataTests": {
+    "endpoints": {
+      "realms": true,
+      "skills": true,
+      "items": true
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "hasSuccessField": true,
+      "hasDataField": true,
+      "dataIsArray": true
+    }
+  },
+  "systemTests": {
+    "healthCheck": {
+      "endpoint": "/health",
+      "expectedStatus": "healthy"
+    },
+    "systemInfo": {
+      "endpoint": "/info",
+      "requiredFields": ["version", "environment"]
+    }
+  },
+  "errorHandlingTests": {
+    "notFound": {
+      "characterId": "non-existent-id-12345",
+      "expectedStatusCode": 404
+    },
+    "badRequest": {
+      "invalidData": {},
+      "expectedStatusCode": 400
+    }
+  },
+  "validationTests": {
+    "requiredFields": ["name", "gender", "realm_level"],
+    "invalidTypes": {
+      "realm_level": "invalid_number",
+      "cultivation_value": "not_a_number"
+    },
+    "invalidValues": {
+      "gender": "invalid_gender",
+      "life_state": "invalid_state"
+    }
+  },
+  "httpStatusTests": {
+    "methods": {
+      "GET": {
+        "expectedStatus": 200,
+        "description": "GET请求成功"
+      },
+      "POST": {
+        "expectedStatus": 201,
+        "description": "POST请求创建成功"
+      },
+      "PUT": {
+        "expectedStatus": 200,
+        "description": "PUT请求更新成功"
+      },
+      "DELETE": {
+        "expectedStatus": 200,
+        "description": "DELETE请求删除成功"
+      }
+    }
+  }
+}

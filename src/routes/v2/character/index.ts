@@ -11,6 +11,18 @@ import skillsRoutes from './skills.js';
 import weaponsRoutes from './weapons.js';
 import currencyRoutes from './currency.js';
 import itemsRoutes from './items.js';
+import {
+  validateCharacterUUID,
+  validateCreateCharacterBaseInfo,
+  validateUpdateCharacterBaseInfo,
+  validateCharacterAffinities,
+  validateCharacterStrength,
+  validateCharacterSkills,
+  validateCharacterCurrency,
+  validateAffinityRangeQuery,
+  validatePaginationQuery,
+  validateDateRangeQuery
+} from '../../../middleware/validation/character.js';
 
 const router = Router();
 
