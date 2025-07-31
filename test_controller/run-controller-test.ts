@@ -181,7 +181,7 @@ async function main(): Promise<void> {
 }
 
 // 运行主函数
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 

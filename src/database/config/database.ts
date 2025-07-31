@@ -164,6 +164,26 @@ export class DatabaseManager {
   }
 
   /**
+   * 执行事务
+   */
+  public async transaction<T>(callback: (connection: Connection) => Promise<T>): Promise<T> {
+    const pool = await this.connect();
+    const connection = await pool.getConnection();
+    
+    try {
+      await connection.beginTransaction();
+      const result = await callback(connection);
+      await connection.commit();
+      return result;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
+  }
+
+  /**
    * 获取连接池状态信息
    */
   public getPoolStatus(): { connected: boolean; connectionLimit?: number } {

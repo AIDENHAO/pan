@@ -209,23 +209,45 @@ export abstract class BaseDAL<T, K = string> implements IBaseDAL<T, K> {
       return [];
     }
 
-    const results: T[] = [];
-    
-    // 使用事务批量插入
-    await dbManager.exec('BEGIN TRANSACTION');
-    
-    try {
+    return await dbManager.transaction(async (connection) => {
+      const results: T[] = [];
+      
       for (const data of dataArray) {
-        const created = await this.create(data);
-        results.push(created);
+        const keys = Object.keys(data);
+        const values = Object.values(data);
+        const placeholders = keys.map(() => '?').join(', ');
+        const columns = keys.map(key => `\`${key}\``).join(', ');
+        
+        // 添加时间戳
+        const now = new Date();
+        const allKeys = [...keys, 'create_time', 'update_time'];
+        const allValues = [...values, now, now];
+        const allPlaceholders = allKeys.map(() => '?').join(', ');
+        const allColumns = allKeys.map(key => `\`${key}\``).join(', ');
+        
+        const sql = `INSERT INTO \`${this.tableName}\` (${allColumns}) VALUES (${allPlaceholders})`;
+        const [result] = await connection.execute(sql, allValues);
+        
+        // 获取插入的记录
+        let insertId: any;
+        if (this.primaryKey === 'id' && (result as any).insertId) {
+          insertId = (result as any).insertId;
+        } else {
+          // 对于非自增主键，使用传入的主键值
+          insertId = data[this.primaryKey as keyof typeof data];
+        }
+        
+        const selectSql = `SELECT * FROM \`${this.tableName}\` WHERE \`${this.primaryKey}\` = ?`;
+        const [rows] = await connection.execute(selectSql, [insertId]);
+        const created = (rows as T[])[0];
+        
+        if (created) {
+          results.push(created);
+        }
       }
       
-      await dbManager.exec('COMMIT');
       return results;
-    } catch (error) {
-      await dbManager.exec('ROLLBACK');
-      throw error;
-    }
+    });
   }
 
   /**
